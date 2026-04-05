@@ -36,12 +36,10 @@ COMMON
     // CUSTOM
     struct SnowTerrainBuffer
     {
-        float2 PlayerCamera;
-        int MaskLow;
-        int MaskHigh;
+        int Mask;
         float SnowHeight;
-        float BlendStartDistance;
-        float HighRenderDistance;
+        float Padding1;
+        float Padding2;
     };
     
     StructuredBuffer<SnowTerrainBuffer> g_bSnowTerrain < Attribute("SnowTerrainBuffer"); >;
@@ -573,32 +571,10 @@ PS
     #endif
 
         SnowTerrainBuffer terrainData = g_bSnowTerrain[0];
-        Texture2D maskLow = Bindless::GetTexture2D(terrainData.MaskLow, false);
-        Texture2D maskHigh = Bindless::GetTexture2D(terrainData.MaskHigh, false);
-
-        float rawDistance = distance( terrainData.PlayerCamera, i.WorldPosition.xy );
-        float lerpedDistance = RemapValClamped(
-            rawDistance,
-            terrainData.BlendStartDistance,
-            terrainData.HighRenderDistance,
-            0,
-            1
-        );
-
-        // get uv centered around player
-        float offset = terrainData.HighRenderDistance;
-        float2 centerPosition = terrainData.PlayerCamera;
-        float2 topLeft = centerPosition + float2( -offset, offset );
-        float2 bottomRight = centerPosition + float2( offset, -offset );
-        float2 highUv = i.WorldPosition.xy;
-        highUv = RemapFloat2Clamped( highUv, topLeft, bottomRight, float2(0, 0), float2(1, 1) );
-
-        float3 pixelLow = maskLow.Sample(g_sPointClamp, uv).rgb;
-        float3 pixelHigh = maskHigh.Sample(g_sPointClamp, highUv).rgb;
-        float3 blendedPixels = lerp(pixelLow, pixelHigh, lerpedDistance);
+        Texture2D mask = Bindless::GetTexture2D(terrainData.Mask, false);
 
         Material p = Material::Init();
-        p.Albedo = blendedPixels;
+        p.Albedo = mask.Sample( g_sPointClamp, uv ).rgb;
         p.Normal = TransformNormal( norm, geoNormal, tangentU, tangentV );
         p.Roughness = roughness;
         p.Metalness = metalness;

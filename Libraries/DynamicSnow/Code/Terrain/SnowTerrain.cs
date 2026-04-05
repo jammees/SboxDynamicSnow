@@ -14,9 +14,6 @@ public sealed class SnowTerrain : Component
 	[RequireComponent]
 	public Sandbox.Terrain Terrain { get; set; }
 
-	[Property]
-	public CameraComponent ObserverCamera { get; set; }
-
 	/// <summary>
 	/// How high should the snow be. Recommended to keep this
 	/// relatively low to prevent the player camera clipping into
@@ -34,16 +31,6 @@ public sealed class SnowTerrain : Component
 			UpdateTerrainCameraPosition();
 		}
 	}
-
-	[Property]
-	[Group( "Config" )]
-	[Range( 0f, 2000f ), Step( 1f )]
-	public float HighRenderDistance = 20f;
-
-	[Property]
-	[Group( "Config" )]
-	[Range( 0f, 2000f ), Step( 1f )]
-	public float BlendStartDistance = 20f;
 
 	/// <summary>
 	/// Objects with these tags can collide with the snow and
@@ -63,29 +50,24 @@ public sealed class SnowTerrain : Component
 
 	[Property]
 	[Group( "Config" )]
-	public SupportedTextureSize LowMaskSize { get; set; } = SupportedTextureSize.Small;
-
-	[Property]
-	[Group( "Config" )]
 	public SupportedTextureSize HighMaskSize { get; set; } = SupportedTextureSize.Big;
 
 	private const string TERRAIN_COMPUTE_PATH = "shaders/snowterraincompute.shader";
 	private const string DEBUG_LOW_MASK_PATH = "showcase/textures/debug/lowmask512.vtex";
 	private const string DEBUG_HIGH_MASK_PATH = "showcase/textures/debug/highmask2048.vtex";
 
-	private int LowTextureSize => LowMaskSize.AsInt();
 	private int HighTextureSize => HighMaskSize.AsInt();
 
 	private GpuBuffer<SnowTerrainBuffer> _terrainBuffer;
 	private CommandList _renderList;
 	private CameraComponent _colliderCamera;
-	private Texture _maskLow;
-	private Texture _maskHigh;
+	private Texture _processedMask;
+	private Texture _renderTarget;
 
 	protected override void OnEnabled()
 	{
-		CreateTerrainCamera();
 		CreateTextures();
+		CreateTerrainCamera();
 
 		_terrainBuffer = new( 1, GpuBuffer.UsageFlags.Structured, "SnowTerrainBuffer" );
 
@@ -101,8 +83,7 @@ public sealed class SnowTerrain : Component
 		_colliderCamera?.DestroyGameObject();
 		_terrainBuffer?.Dispose();
 
-		_maskLow?.Dispose();
-		_maskHigh?.Dispose();
+		_processedMask?.Dispose();
 	}
 
 	protected override void OnUpdate()
@@ -113,12 +94,8 @@ public sealed class SnowTerrain : Component
 
 		SnowTerrainBuffer bufferData = new()
 		{
-			PlayerCamera = ObserverCamera.WorldPosition,
-			MaskLow = _maskLow.Index,
-			MaskHigh = _maskHigh.Index,
+			Mask = _processedMask.Index,
 			SnowHeight = SnowHeight,
-			BlendStartDistance = BlendStartDistance,
-			HighRenderDistance = HighRenderDistance,
 		};
 		_terrainBuffer.SetData( new List<SnowTerrainBuffer>() { bufferData } );
 
@@ -127,11 +104,14 @@ public sealed class SnowTerrain : Component
 
 	private void CreateTextures()
 	{
-		_maskLow?.Dispose();
-		_maskHigh?.Dispose();
+		_processedMask?.Dispose();
+		_renderTarget?.Dispose();
 
-		_maskLow = Texture.LoadFromFileSystem( DEBUG_LOW_MASK_PATH, FileSystem.Mounted );
-		_maskHigh = Texture.LoadFromFileSystem( DEBUG_HIGH_MASK_PATH, FileSystem.Mounted );
+		_processedMask = Texture.LoadFromFileSystem( DEBUG_HIGH_MASK_PATH, FileSystem.Mounted );
+
+		_renderTarget = Texture.CreateRenderTarget()
+			.WithSize( HighTextureSize, HighTextureSize )
+			.Create();
 	}
 
 	private void CreateTerrainCamera()
@@ -147,9 +127,9 @@ public sealed class SnowTerrain : Component
 		_colliderCamera.BackgroundColor = Color.Black;
 		_colliderCamera.EnablePostProcessing = false;
 
-		UpdateTerrainCameraPosition();
+		_colliderCamera.RenderTarget = _renderTarget;
 
-		Log.Info( "Created and updated camera" );
+		UpdateTerrainCameraPosition();
 	}
 
 	private void UpdateTerrainCameraPosition()

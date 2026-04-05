@@ -6,29 +6,16 @@ namespace Snow.Terrain;
 internal struct SnowTerrainBuffer
 {
 	/// <summary>
-	/// Where is the observer's camera relative to the terrain,
-	/// range from 0 to 1
+	/// Index of the snow mask
 	/// </summary>
-	public Vector2 PlayerCamera;
-
-	/// <summary>
-	/// Index of the snow mask that is rendered at a
-	/// lower resolution
-	/// </summary>
-	public int MaskLow;
-
-	/// <summary>
-	/// Index of the snow mask that is rendered at a
-	/// higher resolution near the player
-	/// </summary>
-	public int MaskHigh;
+	public int Mask;
 
 	/// <summary>
 	/// How tall is the snow
 	/// </summary>
 	public float SnowHeight;
 
-	public float BlendStartDistance;
+	public float Padding1;
 
-	public float HighRenderDistance;
+	public float Padding2;
 }
