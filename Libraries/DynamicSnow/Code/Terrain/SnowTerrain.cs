@@ -2,7 +2,6 @@
 using Sandbox.Rendering;
 using System;
 using System.Collections.Generic;
-using System.Drawing;
 
 namespace Snow.Terrain;
 
@@ -142,7 +141,7 @@ public sealed class SnowTerrain : Component
 		_colliderCamera = cameraContainer.AddComponent<CameraComponent>();
 		_colliderCamera.IsMainCamera = false;
 		_colliderCamera.Orthographic = true;
-		_colliderCamera.ZNear = 1;
+		_colliderCamera.ZNear = 0;
 		_colliderCamera.OrthographicHeight = Terrain.Storage.TerrainSize;
 		_colliderCamera.LocalRotation = Rotation.From( new Angles( -90f, 90f, 0f ) );
 		_colliderCamera.BackgroundColor = Color.Black;
@@ -158,7 +157,7 @@ public sealed class SnowTerrain : Component
 		if ( _colliderCamera.IsValid() is false )
 			return;
 
-		_colliderCamera.LocalPosition = new Vector3( Terrain.Storage.TerrainSize * 0.5f ).WithZ( -SnowHeight );
-		_colliderCamera.ZFar = Terrain.Storage.TerrainHeight + SnowHeight * 2f + _colliderCamera.ZNear;
+		_colliderCamera.LocalPosition = new Vector3( Terrain.Storage.TerrainSize * 0.5f ).WithZ( 0 );
+		_colliderCamera.ZFar = Terrain.Storage.TerrainHeight + SnowHeight;
 	}
 }
