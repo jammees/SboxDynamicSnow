@@ -573,8 +573,10 @@ PS
         SnowTerrainBuffer terrainData = g_bSnowTerrain[0];
         Texture2D mask = Bindless::GetTexture2D(terrainData.Mask, false);
 
+        float sampledMask = mask.Sample( g_sPointClamp, uv ).r;
+
         Material p = Material::Init();
-        p.Albedo = mask.Sample( g_sPointClamp, uv ).rgb;
+        p.Albedo = sampledMask;
         p.Normal = TransformNormal( norm, geoNormal, tangentU, tangentV );
         p.Roughness = roughness;
         p.Metalness = metalness;
