@@ -72,7 +72,7 @@ public sealed class SnowTerrain : Component
 		_terrainBuffer = new( 1, GpuBuffer.UsageFlags.Structured, "SnowTerrainBuffer" );
 
 		_renderList = new();
-		_colliderCamera.AddCommandList( _renderList, Stage.AfterDepthPrepass, 100 );
+		_colliderCamera.AddCommandList( _renderList, Stage.AfterDepthPrepass, 1000 );
 
 		Log.Info( $"Added command list" );
 	}
@@ -83,7 +83,7 @@ public sealed class SnowTerrain : Component
 		_colliderCamera?.DestroyGameObject();
 		_terrainBuffer?.Dispose();
 
-		_processedMask?.Dispose();
+		CreateTextures( disposeOnly: true );
 	}
 
 	protected override void OnUpdate()
@@ -91,6 +91,12 @@ public sealed class SnowTerrain : Component
 		ComputeShader processorShader = new( TERRAIN_COMPUTE_PATH );
 
 		_renderList?.Reset();
+
+		_renderList.Attributes.GrabDepthTexture( "Depth" );
+		_renderList.Attributes.Set( "SnowMask", _processedMask );
+		RenderTargetHandle handle = _renderList.Attributes.GrabFrameTexture( "TestDepth" );
+
+		_renderList.DispatchCompute( processorShader, HighTextureSize, HighTextureSize, 1 );
 
 		SnowTerrainBuffer bufferData = new()
 		{
@@ -102,16 +108,26 @@ public sealed class SnowTerrain : Component
 		Scene.RenderAttributes.Set( "SnowTerrainBuffer", _terrainBuffer );
 	}
 
-	private void CreateTextures()
+	private void CreateTextures( bool disposeOnly = false )
 	{
 		_processedMask?.Dispose();
 		_renderTarget?.Dispose();
 
-		_processedMask = Texture.LoadFromFileSystem( DEBUG_HIGH_MASK_PATH, FileSystem.Mounted );
+		if ( disposeOnly is true )
+			return;
+
+		//_processedMask = Texture.LoadFromFileSystem( DEBUG_HIGH_MASK_PATH, FileSystem.Mounted );
+
+		_processedMask = Texture.Create( HighTextureSize, HighTextureSize, ImageFormat.R16 )
+			.WithName( "ProcessedSnowMask" )
+			.WithAnonymous( false )
+			.WithDynamicUsage()
+			.WithUAVBinding()
+			.Finish();
 
 		_renderTarget = Texture.CreateRenderTarget()
 			.WithSize( HighTextureSize, HighTextureSize )
-			.Create();
+			.Create( name: "SnowColliderRenderTarget", anonymous: false );
 	}
 
 	private void CreateTerrainCamera()
