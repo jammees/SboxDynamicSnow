@@ -121,6 +121,7 @@ public sealed class SnowTerrain : Component
 			.Finish();
 
 		_renderTarget = Texture.CreateRenderTarget()
+			.WithMSAA( MultisampleAmount.MultisampleNone )
 			.WithSize( HighTextureSize, HighTextureSize )
 			.Create( name: "SnowColliderRenderTarget", anonymous: false );
 	}
