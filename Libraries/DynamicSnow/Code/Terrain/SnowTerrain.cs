@@ -139,6 +139,7 @@ public sealed class SnowTerrain : Component
 		_colliderCamera.BackgroundColor = Color.Black;
 		_colliderCamera.EnablePostProcessing = false;
 
+		_colliderCamera.CustomSize = new Vector2( HighTextureSize, HighTextureSize );
 		_colliderCamera.RenderTarget = _renderTarget;
 
 		UpdateTerrainCameraPosition();
