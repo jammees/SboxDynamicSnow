@@ -113,8 +113,6 @@ public sealed class SnowTerrain : Component
 		if ( disposeOnly is true )
 			return;
 
-		//_processedMask = Texture.LoadFromFileSystem( DEBUG_HIGH_MASK_PATH, FileSystem.Mounted );
-
 		_processedMask = Texture.Create( HighTextureSize, HighTextureSize, ImageFormat.R16 )
 			.WithName( "ProcessedSnowMask" )
 			.WithAnonymous( false )
