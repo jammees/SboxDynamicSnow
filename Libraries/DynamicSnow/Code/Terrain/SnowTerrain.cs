@@ -44,7 +44,11 @@ public sealed class SnowTerrain : Component
 		set
 		{
 			field = value;
-			UpdateTerrainCameraPosition();
+
+			if ( _colliderCamera.IsValid() is false )
+				return;
+
+			_colliderCamera.RenderTags = field;
 		}
 	}
 
@@ -138,6 +142,7 @@ public sealed class SnowTerrain : Component
 		_colliderCamera.LocalRotation = Rotation.From( new Angles( -90f, 90f, 0f ) );
 		_colliderCamera.BackgroundColor = Color.Black;
 		_colliderCamera.EnablePostProcessing = false;
+		_colliderCamera.RenderTags = SnowColliderTags;
 
 		_colliderCamera.CustomSize = new Vector2( HighTextureSize, HighTextureSize );
 		_colliderCamera.RenderTarget = _renderTarget;
