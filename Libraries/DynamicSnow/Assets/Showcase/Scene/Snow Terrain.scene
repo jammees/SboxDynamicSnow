@@ -185,9 +185,9 @@
       "__version": 2,
       "Flags": 0,
       "Name": "Plane (1)",
-      "Position": "1500,1500,1792",
+      "Position": "500.0005,500,512.0002",
       "Rotation": "0,1,0,0.0000001947072",
-      "Scale": "60,60,0.5",
+      "Scale": "20,20,0.01",
       "Tags": "",
       "Enabled": true,
       "NetworkMode": 2,
@@ -708,8 +708,8 @@
           "SubdivisionLodCount": 3,
           "Surface": null,
           "SurfaceVelocity": "0,0,0",
-          "TerrainHeight": 500,
-          "TerrainSize": 3000
+          "TerrainHeight": 100,
+          "TerrainSize": 1000
         },
         {
           "__type": "Snow.Terrain.SnowTerrain",
@@ -863,7 +863,7 @@
     "GameObjectSystems": {
       "Sandbox.Clutter.ClutterGridSystem": {
         "Storage": {
-          "$blob": "79ad79f0-356d-44aa-aa01-2fada27d99e9"
+          "$blob": "5ce6501e-eb93-4793-9ef0-9e95f6899811"
         }
       },
       "Sandbox.MovieMaker.MovieRecorderSystem": {
