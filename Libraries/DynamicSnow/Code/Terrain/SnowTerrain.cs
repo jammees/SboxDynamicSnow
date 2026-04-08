@@ -53,8 +53,6 @@ public sealed class SnowTerrain : Component
 	public SupportedTextureSize HighMaskSize { get; set; } = SupportedTextureSize.Big;
 
 	private const string TERRAIN_COMPUTE_PATH = "shaders/snowterraincompute.shader";
-	private const string DEBUG_LOW_MASK_PATH = "showcase/textures/debug/lowmask512.vtex";
-	private const string DEBUG_HIGH_MASK_PATH = "showcase/textures/debug/highmask2048.vtex";
 
 	private int HighTextureSize => HighMaskSize.AsInt();
 
