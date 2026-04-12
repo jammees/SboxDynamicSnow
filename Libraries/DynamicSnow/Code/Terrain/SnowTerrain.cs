@@ -94,6 +94,9 @@ public sealed class SnowTerrain : Component
 
 	protected override void OnUpdate()
 	{
+		if ( _processedMask.IsValid() is false )
+			return;
+
 		ComputeShader processorShader = new( TERRAIN_COMPUTE_PATH );
 
 		_renderList?.Reset();
