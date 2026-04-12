@@ -111,6 +111,7 @@ public sealed class SnowTerrain : Component
 			_renderList.UavBarrier( _processedMask );
 		}
 
+		// probably should just pass in the texture indexes instead of the actual texture
 		_renderList.Attributes.Set( "TerrainHeightmap", Terrain.HeightMap );
 		_renderList.Attributes.Set( "SnowHeight", SnowHeight );
 		_renderList.Attributes.Set( "TerrainHeight", Terrain.Storage.TerrainHeight );
