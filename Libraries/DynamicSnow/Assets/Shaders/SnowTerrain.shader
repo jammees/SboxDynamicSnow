@@ -144,6 +144,14 @@ VS
         }
 
         o.WorldPosition = mul( Terrain::Get().Transform, float4( o.LocalPosition, 1.0 ) ).xyz;
+
+        // CUSTOM
+        SnowTerrainBuffer terrainData = g_bSnowTerrain[0];
+        Texture2D mask = Bindless::GetTexture2D(terrainData.Mask, false);
+
+        float snowHeight = mask.SampleLevel( g_sPointClamp, uv, 0 ).r;
+        o.WorldPosition.z += snowHeight * terrainData.SnowHeight;
+
         o.PixelPosition = Position3WsToPs( o.WorldPosition.xyz );
         o.LodLevel = i.PositionAndLod.z;
 
