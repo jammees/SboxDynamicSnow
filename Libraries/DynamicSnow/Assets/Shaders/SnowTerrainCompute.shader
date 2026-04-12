@@ -30,7 +30,7 @@ CS
 	void PipelineUpdateMask( uint3 id: SV_DispatchThreadID )
 	{
 		// not sure how it works but it just works
-		float depth = Depth::GetWorldPosition(id.xy).z;
+		float depth = Depth::GetWorldPosition(id.xy).z; // NOTE: Probably need to negate the camera position from this!
 
 		float terrainHeight = g_tTerrainHeightmap[id.xy];
 		terrainHeight *= g_fTerrainHeight;
