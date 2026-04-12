@@ -101,7 +101,6 @@ public sealed class SnowTerrain : Component
 
 		_renderList?.Reset();
 
-		_renderList.Attributes.GrabDepthTexture( "DepthBufferCopy" );
 		_renderList.Attributes.Set( "SnowMask", _processedMask );
 
 		if ( _isMaskCleared is false )
