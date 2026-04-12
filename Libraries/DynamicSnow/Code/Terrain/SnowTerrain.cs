@@ -66,10 +66,14 @@ public sealed class SnowTerrain : Component
 	private Texture _processedMask;
 	private Texture _renderTarget;
 
+	private bool _isMaskCleared;
+
 	protected override void OnEnabled()
 	{
 		CreateTextures();
 		CreateTerrainCamera();
+
+		_isMaskCleared = false;
 
 		_terrainBuffer = new( 1, GpuBuffer.UsageFlags.Structured, "SnowTerrainBuffer" );
 
@@ -97,6 +101,19 @@ public sealed class SnowTerrain : Component
 		_renderList.Attributes.GrabDepthTexture( "DepthBufferCopy" );
 		_renderList.Attributes.Set( "SnowMask", _processedMask );
 
+		if ( _isMaskCleared is false )
+		{
+			_isMaskCleared = true;
+			_renderList.Attributes.SetCombo( "D_PIPELINE_STATE", PipelineStates.ClearMask );
+			_renderList.DispatchCompute( processorShader, HighTextureSize, HighTextureSize, 1 );
+			_renderList.UavBarrier( _processedMask );
+		}
+
+		_renderList.Attributes.Set( "TerrainHeightmap", Terrain.HeightMap );
+		_renderList.Attributes.Set( "SnowHeight", SnowHeight );
+		_renderList.Attributes.Set( "TerrainHeight", Terrain.Storage.TerrainHeight );
+
+		_renderList.Attributes.SetCombo( "D_PIPELINE_STATE", PipelineStates.UpdateMask );
 		_renderList.DispatchCompute( processorShader, HighTextureSize, HighTextureSize, 1 );
 
 		SnowTerrainBuffer bufferData = new()
