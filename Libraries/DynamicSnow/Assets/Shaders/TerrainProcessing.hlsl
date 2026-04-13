@@ -15,9 +15,14 @@ StructuredBuffer<SnowTerrainBuffer> g_bSnowTerrain < Attribute("SnowTerrainBuffe
 
 class SnowTerrain
 {
+    static SnowTerrainBuffer Get()
+    {
+        return g_bSnowTerrain[0];
+    }
+
     static inline float3 ProcessTerrainVertex( float3 worldPosition, float2 uv )
     {
-        SnowTerrainBuffer terrainData = g_bSnowTerrain[0];
+        SnowTerrainBuffer terrainData = Get();
         Texture2D mask = Bindless::GetTexture2D(terrainData.Mask, false);
 
         float snowHeight = mask.SampleLevel( g_sPointClamp, uv, 0 ).r;
