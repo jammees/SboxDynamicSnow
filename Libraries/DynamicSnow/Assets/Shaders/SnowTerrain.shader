@@ -29,21 +29,10 @@ COMMON
     #include "common/shared.hlsl"
     #include "common/Bindless.hlsl"
     #include "terrain/TerrainCommon.hlsl"
+    #include "./TerrainProcessing.hlsl"
 
     int g_nDebugView < Attribute( "DebugView" ); >;
     int g_nPreviewLayer < Attribute( "PreviewLayer" ); >;
-
-    // CUSTOM
-    struct SnowTerrainBuffer
-    {
-        int Mask;
-        float SnowHeight;
-        float Padding1;
-        float Padding2;
-    };
-    
-    StructuredBuffer<SnowTerrainBuffer> g_bSnowTerrain < Attribute("SnowTerrainBuffer"); >;
-    // CUSTOM END
 
     bool g_bVertexDisplacement < Attribute( "VertexDisplacement" ); Default( 0 ); >;
 }
@@ -145,12 +134,7 @@ VS
 
         o.WorldPosition = mul( Terrain::Get().Transform, float4( o.LocalPosition, 1.0 ) ).xyz;
 
-        // CUSTOM
-        SnowTerrainBuffer terrainData = g_bSnowTerrain[0];
-        Texture2D mask = Bindless::GetTexture2D(terrainData.Mask, false);
-
-        float snowHeight = mask.SampleLevel( g_sPointClamp, uv, 0 ).r;
-        o.WorldPosition.z += snowHeight * terrainData.SnowHeight;
+        o.WorldPosition = SnowTerrain::ProcessTerrainVertex( o.WorldPosition, uv );
 
         o.PixelPosition = Position3WsToPs( o.WorldPosition.xyz );
         o.LodLevel = i.PositionAndLod.z;
