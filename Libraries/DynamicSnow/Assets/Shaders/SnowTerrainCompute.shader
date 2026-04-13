@@ -18,6 +18,7 @@ CS
 	Texture2D<float> g_tTerrainHeightmap 	< Attribute( "TerrainHeightmap" ); >;	// terrain heightmap
 	float g_fSnowHeight 					< Attribute( "SnowHeight" ); >;			// how tall is the snow
 	float g_fTerrainHeight					< Attribute( "TerrainHeight" ); >;		// how tall is terrain
+	float g_fUvScalar						< Attribute( "UvScalar" ); >;			// scalar of id
 
 	// OUT
 	RWTexture2D<float> g_tSnowMask 			< Attribute( "SnowMask" ); >;			// deformation, no blur
@@ -32,7 +33,9 @@ CS
 		// not sure how it works but it just works
 		float depth = (Depth::GetWorldPosition(id.xy) - g_vCameraPositionWs).z;
 
-		float terrainHeight = g_tTerrainHeightmap[id.xy];
+		// calculate heightmap UV in case texture sizes do not match up
+		float2 heightmapIndex = id.xy * g_fUvScalar;
+		float terrainHeight = g_tTerrainHeightmap[heightmapIndex];
 		terrainHeight *= g_fTerrainHeight;
 		terrainHeight += g_fSnowHeight;
 

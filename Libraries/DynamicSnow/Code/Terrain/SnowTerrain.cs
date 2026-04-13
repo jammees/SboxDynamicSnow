@@ -111,10 +111,14 @@ public sealed class SnowTerrain : Component
 			_renderList.UavBarrier( _processedMask );
 		}
 
+		float heightmapResolution = Terrain.Storage.Resolution;
+		float uvScalar = heightmapResolution / HighTextureSize;
+
 		// probably should just pass in the texture indexes instead of the actual texture
 		_renderList.Attributes.Set( "TerrainHeightmap", Terrain.HeightMap );
 		_renderList.Attributes.Set( "SnowHeight", SnowHeight );
 		_renderList.Attributes.Set( "TerrainHeight", Terrain.Storage.TerrainHeight );
+		_renderList.Attributes.Set( "UvScalar", uvScalar );
 
 		_renderList.Attributes.SetCombo( "D_PIPELINE_STATE", PipelineStates.UpdateMask );
 		_renderList.DispatchCompute( processorShader, HighTextureSize, HighTextureSize, 1 );
