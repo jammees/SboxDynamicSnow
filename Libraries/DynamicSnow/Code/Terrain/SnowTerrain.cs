@@ -144,7 +144,7 @@ public sealed class SnowTerrain : Component
 		_processedMask = Texture.Create( HighTextureSize, HighTextureSize, ImageFormat.R16 )
 			.WithName( "ProcessedSnowMask" )
 			.WithAnonymous( false )
-			.WithDynamicUsage()
+			.WithGPUOnlyUsage()
 			.WithUAVBinding()
 			.Finish();
 
