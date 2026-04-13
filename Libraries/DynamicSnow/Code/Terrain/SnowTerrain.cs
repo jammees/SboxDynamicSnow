@@ -148,6 +148,8 @@ public sealed class SnowTerrain : Component
 			.WithUAVBinding()
 			.Finish();
 
+		// NOTE: Probably should not use RGBA8888 format here
+		// from testing A8 seemed to be fine enough
 		_renderTarget = Texture.CreateRenderTarget()
 			.WithMSAA( MultisampleAmount.MultisampleNone )
 			.WithSize( HighTextureSize, HighTextureSize )
