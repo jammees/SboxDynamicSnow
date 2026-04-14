@@ -56,8 +56,6 @@ public sealed class SnowTerrain : Component
 	[Group( "Config" )]
 	public SupportedTextureSize HighMaskSize { get; set; } = SupportedTextureSize.Big;
 
-	private const string TERRAIN_COMPUTE_PATH = "shaders/snowterraincompute.shader";
-
 	private const string CLEAR_DEFORMATION_COMPUTE = "shaders/computes/cleardeformation.shader";
 	private const string UPDATE_DEFORMATION_COMPUTE = "shaders/computes/updatedeformation.shader";
 	private const string UPDATE_MASK_COMPUTE = "shaders/computes/updatesnowmask.shader";
