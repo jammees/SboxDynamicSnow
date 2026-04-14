@@ -110,7 +110,7 @@ public sealed class SnowTerrain : Component
 		_renderList.Attributes.Set( "TerrainHeightmap", Terrain.HeightMap );
 		_renderList.Attributes.Set( "SnowHeight", SnowHeight );
 		_renderList.Attributes.Set( "TerrainHeight", Terrain.Storage.TerrainHeight );
-		_renderList.Attributes.Set( "UvScalar", GetInverseDimensionSize() );
+		_renderList.Attributes.Set( "HeightmapUvScale", GetInverseDimensionSize() );
 		_renderList.Attributes.Set( "SnowMask", _snowMask );
 
 		if ( _isMaskCleared is false )
