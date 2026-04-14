@@ -3,6 +3,7 @@
 
 #include "common/Bindless.hlsl"
 #include "common_samplers.fxc"
+#include "Hlsl/AttributesNames.hlsl"
 
 struct SnowTerrainBuffer
 {
@@ -12,7 +13,7 @@ struct SnowTerrainBuffer
     float Padding2;
 };
 
-StructuredBuffer<SnowTerrainBuffer> g_bSnowTerrain < Attribute("SnowTerrainBuffer"); >;
+StructuredBuffer<SnowTerrainBuffer> g_bSnowTerrain < Attribute( TERRAIN_SNOW_BUFFER_ATTR ); >;
 
 class SnowTerrain
 {

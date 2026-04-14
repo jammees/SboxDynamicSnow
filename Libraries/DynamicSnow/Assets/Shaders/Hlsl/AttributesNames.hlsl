@@ -10,4 +10,6 @@
 
 #define HEIGHTMAP_UV_SCALE_ATTR     "HeightmapUvScale" 
 
+#define TERRAIN_SNOW_BUFFER_ATTR    "SnowTerrainBuffer"
+
 #endif
