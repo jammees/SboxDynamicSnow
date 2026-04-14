@@ -7,6 +7,7 @@ COMMON
 {
 	#include "common/shared.hlsl"
 	#include "Hlsl/AttributesNames.hlsl"
+	#include "Hlsl/Utility.hlsl"
 }
 
 CS
@@ -20,6 +21,9 @@ CS
 	[numthreads( 8, 8, 1 )]
 	void MainCs( uint3 id : SV_DispatchThreadID )
 	{
-		g_tSnowMask[id.xy] = g_tDeformationMask[id.xy];
+		float2 maskSize = GetFloatTextureDimensions( g_tDeformationMask, 0 );
+		float2 uv = (float2)id.xy / maskSize;
+
+		g_tSnowMask[id.xy] = CustomGaussianBlur( g_tDeformationMask, g_sAniso, id.xy, 3.0 );
 	}	
 }
