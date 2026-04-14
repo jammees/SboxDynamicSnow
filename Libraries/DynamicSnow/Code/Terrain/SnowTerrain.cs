@@ -58,12 +58,17 @@ public sealed class SnowTerrain : Component
 
 	private const string TERRAIN_COMPUTE_PATH = "shaders/snowterraincompute.shader";
 
+	private const string CLEAR_DEFORMATION_COMPUTE = "shaders/computes/cleardeformation.shader";
+	private const string UPDATE_DEFORMATION_COMPUTE = "shaders/computes/updatedeformation.shader";
+	private const string UPDATE_MASK_COMPUTE = "shaders/computes/updatesnowmask.shader";
+
 	private int HighTextureSize => HighMaskSize.AsInt();
 
 	private GpuBuffer<SnowTerrainBuffer> _terrainBuffer;
 	private CommandList _renderList;
 	private CameraComponent _colliderCamera;
-	private Texture _processedMask;
+	private Texture _rawDeformationMask;
+	private Texture _snowMask;
 	private Texture _renderTarget;
 
 	private bool _isMaskCleared;
@@ -94,54 +99,62 @@ public sealed class SnowTerrain : Component
 
 	protected override void OnUpdate()
 	{
-		if ( _processedMask.IsValid() is false )
+		if ( _rawDeformationMask.IsValid() is false || _snowMask.IsValid() is false )
 			return;
 
-		ComputeShader processorShader = new( TERRAIN_COMPUTE_PATH );
+		ComputeShader updateDeformation = new( UPDATE_DEFORMATION_COMPUTE );
+		ComputeShader updateSnowMask = new( UPDATE_MASK_COMPUTE );
 
 		_renderList?.Reset();
 
-		_renderList.Attributes.Set( "SnowMask", _processedMask );
-
-		if ( _isMaskCleared is false )
-		{
-			_isMaskCleared = true;
-			_renderList.Attributes.SetCombo( "D_PIPELINE_STATE", PipelineStates.ClearMask );
-			_renderList.DispatchCompute( processorShader, HighTextureSize, HighTextureSize, 1 );
-			_renderList.UavBarrier( _processedMask );
-		}
-
-		float heightmapResolution = Terrain.Storage.Resolution;
-		float uvScalar = heightmapResolution / HighTextureSize;
-
 		// probably should just pass in the texture indexes instead of the actual texture
+		_renderList.Attributes.Set( "DeformationMask", _rawDeformationMask );
 		_renderList.Attributes.Set( "TerrainHeightmap", Terrain.HeightMap );
 		_renderList.Attributes.Set( "SnowHeight", SnowHeight );
 		_renderList.Attributes.Set( "TerrainHeight", Terrain.Storage.TerrainHeight );
-		_renderList.Attributes.Set( "UvScalar", uvScalar );
+		_renderList.Attributes.Set( "UvScalar", GetInverseDimensionSize() );
+		_renderList.Attributes.Set( "SnowMask", _snowMask );
 
-		_renderList.Attributes.SetCombo( "D_PIPELINE_STATE", PipelineStates.UpdateMask );
-		_renderList.DispatchCompute( processorShader, HighTextureSize, HighTextureSize, 1 );
+		if ( _isMaskCleared is false )
+		{
+			ComputeShader clearDeformation = new( CLEAR_DEFORMATION_COMPUTE );
+
+			_isMaskCleared = true;
+
+			_renderList.DispatchCompute( clearDeformation, HighTextureSize, HighTextureSize, 1 );
+			_renderList.UavBarrier( _rawDeformationMask );
+		}
+
+		_renderList.DispatchCompute( updateDeformation, HighTextureSize, HighTextureSize, 1 );
+		_renderList.UavBarrier( _rawDeformationMask );
+		_renderList.DispatchCompute( updateSnowMask, HighTextureSize, HighTextureSize, 1 );
 
 		SnowTerrainBuffer bufferData = new()
 		{
-			Mask = _processedMask.Index,
+			Mask = _snowMask.Index,
 			SnowHeight = SnowHeight,
 		};
 		_terrainBuffer.SetData( new List<SnowTerrainBuffer>() { bufferData } );
-
 		Scene.RenderAttributes.Set( "SnowTerrainBuffer", _terrainBuffer );
 	}
 
 	private void CreateTextures( bool disposeOnly = false )
 	{
-		_processedMask?.Dispose();
+		_rawDeformationMask?.Dispose();
+		_snowMask?.Dispose();
 		_renderTarget?.Dispose();
 
 		if ( disposeOnly is true )
 			return;
 
-		_processedMask = Texture.Create( HighTextureSize, HighTextureSize, ImageFormat.R16 )
+		_rawDeformationMask = Texture.Create( HighTextureSize, HighTextureSize, ImageFormat.R16 )
+			.WithName( "RawDeformationSnowMask" )
+			.WithAnonymous( false )
+			.WithGPUOnlyUsage()
+			.WithUAVBinding()
+			.Finish();
+
+		_snowMask = Texture.Create( HighTextureSize, HighTextureSize, ImageFormat.A8 )
 			.WithName( "ProcessedSnowMask" )
 			.WithAnonymous( false )
 			.WithGPUOnlyUsage()
@@ -183,5 +196,11 @@ public sealed class SnowTerrain : Component
 
 		_colliderCamera.LocalPosition = new Vector3( Terrain.Storage.TerrainSize * 0.5f ).WithZ( 0 );
 		_colliderCamera.ZFar = Terrain.Storage.TerrainHeight + SnowHeight;
+	}
+
+	private float GetInverseDimensionSize()
+	{
+		float heightmapResolution = Terrain.Storage.Resolution;
+		return heightmapResolution / HighTextureSize;
 	}
 }

@@ -5,7 +5,6 @@ MODES
 
 COMMON
 {
-	#include "common.fxc"
 	#include "common/shared.hlsl"
 	#include "common/classes/Depth.hlsl"
 	#include "Hlsl/Utility.hlsl"
@@ -13,8 +12,6 @@ COMMON
 
 CS
 {
-	DynamicCombo( D_PIPELINE_STATE, 0..2, Sys( ALL ) );
-
 	// IN
 	Texture2D<float> g_tTerrainHeightmap 	< Attribute( "TerrainHeightmap" ); >;	// terrain heightmap
 	float g_fSnowHeight 					< Attribute( "SnowHeight" ); >;			// how tall is the snow
@@ -24,19 +21,15 @@ CS
 	// OUT
 	RWTexture2D<float> g_tDeformationMask	< Attribute( "DeformationMask" ); >;	// deformation, no blur
 
-	void PipielineSetupMask( uint3 id: SV_DispatchThreadID )
-	{
-		g_tDeformationMask[id.xy] = 1.0;
-	}
-
-	void PipelineUpdateMask( uint3 id: SV_DispatchThreadID )
+	[numthreads( 8, 8, 1 )]
+	void MainCs( uint3 id : SV_DispatchThreadID )
 	{
 		// not sure how it works but it just works
-		float depth = (Depth::GetWorldPosition(id.xy) - g_vCameraPositionWs).z;
+		float depth = ( Depth::GetWorldPosition(id.xy) - g_vCameraPositionWs ).z;
 
 		// calculate heightmap UV in case texture sizes do not match up
 		int heightmapSize = GetFloatTextureDimensions( g_tTerrainHeightmap, 0 ).x;
-		float2 heightmapUv = ((float2)id.xy * g_fUvScalar) / heightmapSize;
+		float2 heightmapUv = ( (float2)id.xy * g_fUvScalar ) / heightmapSize;
 
 		float terrainHeight = g_tTerrainHeightmap.SampleLevel( g_sPointClamp, heightmapUv, 0 );
 		terrainHeight *= g_fTerrainHeight;
@@ -46,17 +39,5 @@ CS
 		deformation = RemapValClamped( deformation, 0.0, g_fSnowHeight, 1.0, 0.0 );
 
 		g_tDeformationMask[id.xy] = min( g_tDeformationMask[id.xy], deformation );
-	}
-
-	[numthreads( 8, 8, 1 )]
-	void MainCs( uint3 id : SV_DispatchThreadID )
-	{
-		#if ( D_PIPELINE_STATE == 0 ) // SETUP
-			PipielineSetupMask( id );
-		#elif ( D_PIPELINE_STATE == 1 ) // UPDATE
-			PipelineUpdateMask( id );
-		#elif ( D_PIPELINE_STATE == 2 ) // BLUR
-
-		#endif
 	}	
 }
