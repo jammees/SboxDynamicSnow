@@ -8,6 +8,7 @@ COMMON
 	#include "common.fxc"
 	#include "common/shared.hlsl"
 	#include "common/classes/Depth.hlsl"
+	#include "Hlsl/Utility.hlsl"
 }
 
 CS
@@ -34,8 +35,10 @@ CS
 		float depth = (Depth::GetWorldPosition(id.xy) - g_vCameraPositionWs).z;
 
 		// calculate heightmap UV in case texture sizes do not match up
-		float2 heightmapIndex = id.xy * g_fUvScalar;
-		float terrainHeight = g_tTerrainHeightmap[heightmapIndex];
+		int heightmapSize = GetFloatTextureDimensions( g_tTerrainHeightmap, 0 ).x;
+		float2 heightmapUv = ((float2)id.xy * g_fUvScalar) / heightmapSize;
+
+		float terrainHeight = g_tTerrainHeightmap.SampleLevel( g_sPointClamp, heightmapUv, 0 );
 		terrainHeight *= g_fTerrainHeight;
 		terrainHeight += g_fSnowHeight;
 
