@@ -199,6 +199,6 @@ public sealed class SnowTerrain : Component
 	private float GetInverseDimensionSize()
 	{
 		float heightmapResolution = Terrain.Storage.Resolution;
-		return heightmapResolution / HighTextureSize;
+		return heightmapResolution / (float)HighTextureSize;
 	}
 }
