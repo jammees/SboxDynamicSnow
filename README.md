@@ -6,6 +6,6 @@ Current progress:
 - [ ] multiplayer support
 - [ ] recalculating terrain normals
 - [ ] control maps support
-- [ ] blurring snow mask
+- [x] blurring snow mask
 - [x] mismatched texture sizes support
 - [x] basic functionality
