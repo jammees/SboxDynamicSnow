@@ -2,6 +2,7 @@
 #define TERRAIN_PROCESSING_HLSL
 
 #include "common/Bindless.hlsl"
+#include "common_samplers.fxc"
 
 struct SnowTerrainBuffer
 {
