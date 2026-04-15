@@ -19,16 +19,17 @@ int2 GetFloatTextureDimensions( RWTexture2D<float> texture )
     return dimension;
 }
 
-float CustomGaussianBlur( Texture2D<float> mask, SamplerState sampler, uint2 uv, float2 size )
+float CustomGaussianBlur( Texture2D<float> mask, SamplerState sampler, uint2 id, float2 size )
 {
     float fl2PI = 6.28318530718f;
     float flDirections = 16.0f;
     float flQuality = 4.0f;
     float flTaps = 1.0f;
 
-    // Had to use this because the original function used Sample which can't
-    // be used outside of fragment also SampleLevel just screwed everything up
-    float vColor = mask[uv.xy];
+    float2 maskSize = GetFloatTextureDimensions( mask, 0 );
+    float2 initialUv = id / maskSize;
+
+    float vColor = mask.SampleLevel( sampler, initialUv, 0 );
 
     [unroll]
     for( float d=0.0; d<fl2PI; d+=fl2PI/flDirections)
@@ -37,7 +38,9 @@ float CustomGaussianBlur( Texture2D<float> mask, SamplerState sampler, uint2 uv,
         for(float j=1.0/flQuality; j<=1.0; j+=1.0/flQuality)
         {
             flTaps += 1;
-            vColor += mask[uv.xy + float2( cos(d), sin(d) ) * size * j];    
+            float2 sampleOffset = float2( cos(d), sin(d) ) * j;
+            float2 offsetUv = (id.xy + sampleOffset * size) / maskSize;
+            vColor += mask.SampleLevel( sampler, offsetUv, 0 );    
         }
     }
 
