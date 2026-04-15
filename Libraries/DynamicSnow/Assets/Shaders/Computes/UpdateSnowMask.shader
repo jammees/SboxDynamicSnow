@@ -21,9 +21,6 @@ CS
 	[numthreads( 8, 8, 1 )]
 	void MainCs( uint3 id : SV_DispatchThreadID )
 	{
-		float2 maskSize = GetFloatTextureDimensions( g_tDeformationMask, 0 );
-		float2 uv = (float2)id.xy / maskSize;
-
-		g_tSnowMask[id.xy] = CustomGaussianBlur( g_tDeformationMask, g_sAniso, id.xy, 3.0 );
+		g_tSnowMask[id.xy] = CustomGaussianBlur( g_tDeformationMask, g_sTrilinearBorder, id.xy, 2 );
 	}	
 }
