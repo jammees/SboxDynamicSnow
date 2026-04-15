@@ -474,7 +474,7 @@ PS
         float3 geoNormal;
 
         // Calculate base normal from heightmap
-        geoNormal = Terrain_Normal( tHeightMap, uv, Terrain::Get().HeightScale, tangentU, tangentV );
+        geoNormal = SnowTerrain::GetTerrainNormal(tHeightMap, uv, Terrain::Get().HeightScale, tangentU, tangentV );
 
         // Transform to world space
         geoNormal = mul( Terrain::Get().Transform, float4( geoNormal, 0.0 ) ).xyz;
