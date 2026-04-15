@@ -6,7 +6,7 @@
       "__version": 2,
       "Flags": 0,
       "Name": "Sun",
-      "Position": "0,0,0",
+      "Position": "0,0,48.73817",
       "Rotation": "-0.0729315,0.4822396,0.1305433,0.8631827",
       "Scale": "1,1,1",
       "Tags": "light_directional,light",
@@ -71,7 +71,7 @@
           "OnComponentUpdate": null,
           "SkyIndirectLighting": true,
           "SkyMaterial": "materials/skybox/skybox_day_01.vmat",
-          "Tint": "1,1,1,1"
+          "Tint": "0.35349,0.60132,1,1"
         },
         {
           "__type": "Sandbox.EnvmapProbe",
@@ -360,9 +360,9 @@
             "component_type": "SkinnedModelRenderer"
           },
           "Clothing": [],
-          "ManualAge": 0.5,
-          "ManualHeight": 0.5,
-          "ManualTint": 0.5,
+          "ManualAge": 0.01,
+          "ManualHeight": 0.81,
+          "ManualTint": 0,
           "OnComponentDestroy": null,
           "OnComponentDisabled": null,
           "OnComponentEnabled": null,
@@ -370,7 +370,7 @@
           "OnComponentStart": null,
           "OnComponentUpdate": null,
           "RemoveUnownedItems": true,
-          "Source": "OwnerConnection",
+          "Source": "LocalUser",
           "WorkshopItems": []
         },
         {
@@ -1045,13 +1045,13 @@
       "CustomBounds": false
     },
     "GameObjectSystems": {
-      "Sandbox.Clutter.ClutterGridSystem": {
-        "Storage": {
-          "$blob": "9746ae80-ab70-483f-9a4a-9aa0e4336c85"
-        }
-      },
       "Sandbox.MovieMaker.MovieRecorderSystem": {
         "DisableClientRecording": false
+      },
+      "Sandbox.Clutter.ClutterGridSystem": {
+        "Storage": {
+          "$blob": "691ea7a6-5dba-49c5-8d47-f7a16d2ee51b"
+        }
       }
     }
   },
