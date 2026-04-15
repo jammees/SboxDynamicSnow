@@ -29,7 +29,7 @@ COMMON
     #include "common/shared.hlsl"
     #include "common/Bindless.hlsl"
     #include "terrain/TerrainCommon.hlsl"
-    #include "./TerrainProcessing.hlsl"
+    #include "Hlsl/TerrainProcessing.hlsl"
 
     int g_nDebugView < Attribute( "DebugView" ); >;
     int g_nPreviewLayer < Attribute( "PreviewLayer" ); >;
