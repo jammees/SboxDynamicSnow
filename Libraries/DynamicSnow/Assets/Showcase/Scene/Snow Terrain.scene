@@ -457,7 +457,7 @@
           ],
           "Children": [
             {
-              "__guid": "acd0dda3-6bd1-4598-b4dd-155767f5dc66",
+              "__guid": "3fba21e6-b087-4585-9447-a187d517ed81",
               "__version": 2,
               "Flags": 0,
               "Name": "Clothing - rubber_gloves_black",
@@ -474,7 +474,7 @@
               "Components": [
                 {
                   "__type": "Sandbox.SkinnedModelRenderer",
-                  "__guid": "2d826d40-c21d-414d-870f-bb35280cd874",
+                  "__guid": "0aeac762-dcdd-4c2b-9ec6-44586fc47870",
                   "__enabled": true,
                   "Flags": 0,
                   "AnimationGraph": null,
@@ -526,7 +526,7 @@
               "Children": []
             },
             {
-              "__guid": "6ad38f71-6327-44f7-9c28-7bb3fb707d92",
+              "__guid": "ca02073c-37a9-4f2b-905c-0e6476ed6852",
               "__version": 2,
               "Flags": 0,
               "Name": "Clothing - eyebrows",
@@ -543,7 +543,7 @@
               "Components": [
                 {
                   "__type": "Sandbox.SkinnedModelRenderer",
-                  "__guid": "5780b4d2-82d7-496d-80ac-7758b2b45b49",
+                  "__guid": "e52daf75-03e2-4f14-9bbe-a80706f826ce",
                   "__enabled": true,
                   "Flags": 0,
                   "AnimationGraph": null,
@@ -595,7 +595,7 @@
               "Children": []
             },
             {
-              "__guid": "b888e170-781c-444a-bb2e-d24323cc55b1",
+              "__guid": "600d8c46-4f90-421c-b575-f27df5e589a2",
               "__version": 2,
               "Flags": 0,
               "Name": "Clothing - beanie",
@@ -612,7 +612,7 @@
               "Components": [
                 {
                   "__type": "Sandbox.SkinnedModelRenderer",
-                  "__guid": "3c9db2a7-da65-44e5-b687-fbb418b21556",
+                  "__guid": "7ca1107c-2821-448b-bd26-c76c74f3b714",
                   "__enabled": true,
                   "Flags": 0,
                   "AnimationGraph": null,
@@ -664,7 +664,7 @@
               "Children": []
             },
             {
-              "__guid": "bfce67f0-7edc-4013-b766-e13fc3bb31ef",
+              "__guid": "89837adb-2f7c-45b2-924c-258e2e2b7568",
               "__version": 2,
               "Flags": 0,
               "Name": "Clothing - wizard_beard",
@@ -681,7 +681,7 @@
               "Components": [
                 {
                   "__type": "Sandbox.SkinnedModelRenderer",
-                  "__guid": "6dd0821b-1599-4acd-8e46-ff28cd0dc820",
+                  "__guid": "d9c65be1-b2f2-4f2f-8d39-3cb1c5e2ad4a",
                   "__enabled": true,
                   "Flags": 0,
                   "AnimationGraph": null,
@@ -733,7 +733,7 @@
               "Children": []
             },
             {
-              "__guid": "61071c9e-c35a-480d-84b4-8faa8efd2739",
+              "__guid": "27c3db86-5e59-4173-b763-5bcbebe605a6",
               "__version": 2,
               "Flags": 0,
               "Name": "Clothing - blue_jumpsuit",
@@ -750,7 +750,7 @@
               "Components": [
                 {
                   "__type": "Sandbox.SkinnedModelRenderer",
-                  "__guid": "efe16216-b121-47f7-8629-50202a90c660",
+                  "__guid": "a2189a68-7e23-4809-a7c5-3640bd219f33",
                   "__enabled": true,
                   "Flags": 0,
                   "AnimationGraph": null,
@@ -802,7 +802,7 @@
               "Children": []
             },
             {
-              "__guid": "ea7f167d-d46f-492c-b243-b9327720348c",
+              "__guid": "5ba7ff86-bb3a-40f8-9381-dac44cb1bd3e",
               "__version": 2,
               "Flags": 0,
               "Name": "Clothing - sneakers",
@@ -819,7 +819,7 @@
               "Components": [
                 {
                   "__type": "Sandbox.SkinnedModelRenderer",
-                  "__guid": "e7c7dd7f-5407-4bef-a9e5-75f5f47ccd25",
+                  "__guid": "e7228200-e846-40ba-bc2f-c0d8fc784f50",
                   "__enabled": true,
                   "Flags": 0,
                   "AnimationGraph": null,
@@ -1461,13 +1461,13 @@
       "CustomBounds": false
     },
     "GameObjectSystems": {
-      "Sandbox.MovieMaker.MovieRecorderSystem": {
-        "DisableClientRecording": false
-      },
       "Sandbox.Clutter.ClutterGridSystem": {
         "Storage": {
           "$blob": "691ea7a6-5dba-49c5-8d47-f7a16d2ee51b"
         }
+      },
+      "Sandbox.MovieMaker.MovieRecorderSystem": {
+        "DisableClientRecording": false
       }
     }
   },
