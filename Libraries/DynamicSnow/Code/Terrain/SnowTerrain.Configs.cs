@@ -44,6 +44,11 @@ public sealed partial class SnowTerrain
 		}
 	}
 
+	/// <summary>
+	/// How big should the working texture be for the following: render target, deformation mask
+	/// and the snow mask. This results in textures scaling exponentially. A 1024x1024 option
+	/// takes ~7 MB of memory.
+	/// </summary>
 	[Property]
 	[Group( "Config" )]
 	public SupportedTextureSizes HighMaskSize { get; set; } = SupportedTextureSizes.Medium;
