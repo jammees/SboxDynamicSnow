@@ -13,7 +13,4 @@ public enum SupportedTextureSizes
 
 	[Title( "2048x2048" )]
 	Big = 2048,
-
-	[Title( "4096x4096" )]
-	Huge = 4096,
 }
