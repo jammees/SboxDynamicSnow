@@ -27,6 +27,7 @@ public sealed partial class SnowTerrain
 		// probably should just pass in the texture indexes instead of the actual texture
 		_renderList.Attributes.Set( "DeformationMask", _rawDeformationMask );
 		_renderList.Attributes.Set( "TerrainHeightmap", Terrain.HeightMap );
+		_renderList.Attributes.Set( "TerrainControl", Terrain.ControlMap );
 		_renderList.Attributes.Set( "SnowHeight", SnowHeight );
 		_renderList.Attributes.Set( "TerrainHeight", Terrain.Storage.TerrainHeight );
 		_renderList.Attributes.Set( "HeightmapUvScale", GetInverseDimensionSize() );
