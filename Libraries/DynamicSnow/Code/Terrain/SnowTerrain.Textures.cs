@@ -36,6 +36,7 @@ public sealed partial class SnowTerrain
 		_renderTarget = Texture.CreateRenderTarget()
 			.WithMSAA( MultisampleAmount.MultisampleNone )
 			.WithSize( HighTextureSize, HighTextureSize )
+			.WithFormat( ImageFormat.A8 )
 			.Create( name: "SnowColliderRenderTarget", anonymous: false );
 	}
 }
