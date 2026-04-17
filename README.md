@@ -6,7 +6,7 @@ Current progress:
 - [ ] chunking
 - [ ] multiplayer support
 - [x] recalculating terrain normals
-- [ ] control maps support
+- [x] control maps support
 - [x] blurring snow mask
 - [x] mismatched texture sizes support
 - [x] basic functionality
