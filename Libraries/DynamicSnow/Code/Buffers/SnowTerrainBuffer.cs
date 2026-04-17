@@ -1,6 +1,6 @@
 ﻿using System.Runtime.InteropServices;
 
-namespace Snow.Terrain;
+namespace Snow.Buffers;
 
 [StructLayout( LayoutKind.Sequential, Pack = 0 )]
 internal struct SnowTerrainBuffer

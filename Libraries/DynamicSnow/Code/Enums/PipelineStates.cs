@@ -1,4 +1,4 @@
-﻿namespace Snow.Terrain;
+﻿namespace Snow.Enums;
 
 public enum PipelineStates
 {

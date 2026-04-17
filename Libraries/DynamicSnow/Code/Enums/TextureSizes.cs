@@ -1,6 +1,6 @@
-﻿namespace Snow.Terrain;
+﻿namespace Snow.Enums;
 
-public enum SupportedTextureSize
+public enum SupportedTextureSizes
 {
 	[Title( "256x256" )]
 	Tiny = 256,
