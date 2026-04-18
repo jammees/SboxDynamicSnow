@@ -6,6 +6,10 @@
 #include "Hlsl/AttributesNames.hlsl"
 #include "terrain/TerrainCommon.hlsl"
 
+#define NOT_IN_EDITOR 0
+
+DynamicCombo( D_DYNAMIC_SNOW_IN_EDITOR, 0..1, sys( all ) );
+
 struct SnowTerrainBuffer
 {
     int Mask;
@@ -25,12 +29,16 @@ class SnowTerrain
 
     static inline float3 ProcessTerrainVertex( float3 worldPosition, float2 uv )
     {
-        SnowTerrainBuffer terrainData = Get();
-        Texture2D mask = Bindless::GetTexture2D(terrainData.Mask, false);
-
-        float snowHeight = mask.SampleLevel( g_sPointClamp, uv, 0 ).r;
-
-        return worldPosition + float3(0.0, 0.0, snowHeight * terrainData.SnowHeight);
+        #if ( D_DYNAMIC_SNOW_IN_EDITOR == NOT_IN_EDITOR )
+            SnowTerrainBuffer terrainData = Get();
+            Texture2D mask = Bindless::GetTexture2D(terrainData.Mask, false);
+        
+            float snowHeight = mask.SampleLevel( g_sPointClamp, uv, 0 ).r;
+        
+            return worldPosition + float3(0.0, 0.0, snowHeight * terrainData.SnowHeight);
+        #else
+            return worldPosition;
+        #endif
     }
 
     // modified version of the function inside of terrain/TerrainCommon.hlsl
@@ -73,10 +81,16 @@ class SnowTerrain
         float sDY = sb - st;
 
         // Normal strength needs to take in account terrain dimensions rather than just texel scale
-        float overallHeight = terrainHeight + terrainData.SnowHeight;
-        float normalStrength = overallHeight / Terrain::Get(  ).Resolution;
+        #if ( D_DYNAMIC_SNOW_IN_EDITOR == NOT_IN_EDITOR )
+            float overallHeight = terrainHeight + terrainData.SnowHeight;
+            float normalStrength = overallHeight / Terrain::Get(  ).Resolution;
 
-        float3 normal = normalize( float3( (dX + sDX), (dY + sDY) * -1, 1.0f / normalStrength ) );
+            float3 normal = normalize( float3( (dX + sDX), (dY + sDY) * -1, 1.0f / normalStrength ) );
+        #else
+            float normalStrength = terrainHeight / Terrain::Get(  ).Resolution;
+
+            float3 normal = normalize( float3( dX, dY * -1, 1.0f / normalStrength ) );
+        #endif
 
         TangentU = normalize( cross( normal, float3( 0, -1, 0 ) ) );
         TangentV = normalize( cross( normal, -TangentU ) );

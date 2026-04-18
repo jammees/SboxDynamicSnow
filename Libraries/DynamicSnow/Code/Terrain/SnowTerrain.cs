@@ -3,7 +3,7 @@ using Sandbox.Rendering;
 
 namespace Snow.Terrain;
 
-public sealed partial class SnowTerrain : Component
+public sealed partial class SnowTerrain : Component, Component.ExecuteInEditor
 {
 	/// <summary>
 	/// Reference to the terrain component.
@@ -14,6 +14,9 @@ public sealed partial class SnowTerrain : Component
 
 	protected override void OnEnabled()
 	{
+		if ( Game.IsPlaying is false )
+			return;
+
 		CreateTextures();
 		CreateTerrainCamera();
 
@@ -27,6 +30,9 @@ public sealed partial class SnowTerrain : Component
 
 	protected override void OnDisabled()
 	{
+		if ( Game.IsPlaying is false )
+			return;
+
 		_colliderCamera?.RemoveCommandList( _renderList );
 		_colliderCamera?.DestroyGameObject();
 		_terrainBuffer?.Dispose();

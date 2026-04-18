@@ -1,4 +1,5 @@
 ﻿using Sandbox;
+using Sandbox.Diagnostics;
 using Sandbox.Rendering;
 using Snow.Buffers;
 using System.Collections.Generic;
@@ -16,8 +17,13 @@ public sealed partial class SnowTerrain
 
 	protected override void OnUpdate()
 	{
-		if ( _rawDeformationMask.IsValid() is false || _snowMask.IsValid() is false )
+		Scene.RenderAttributes.SetCombo( "D_DYNAMIC_SNOW_IN_EDITOR", Game.IsPlaying is false );
+
+		if ( Game.IsPlaying is false )
 			return;
+
+		Assert.NotNull( _rawDeformationMask, "Missing deformation mask!" );
+		Assert.NotNull( _snowMask, "Missing snow mask!" );
 
 		ComputeShader updateDeformation = new( UPDATE_DEFORMATION_COMPUTE );
 		ComputeShader updateSnowMask = new( UPDATE_MASK_COMPUTE );
@@ -47,6 +53,11 @@ public sealed partial class SnowTerrain
 		_renderList.UavBarrier( _rawDeformationMask );
 		_renderList.DispatchCompute( updateSnowMask, HighTextureSize, HighTextureSize, 1 );
 
+		UploadToGPU();
+	}
+
+	private void UploadToGPU()
+	{
 		SnowTerrainBuffer bufferData = new()
 		{
 			Mask = _snowMask.Index,
