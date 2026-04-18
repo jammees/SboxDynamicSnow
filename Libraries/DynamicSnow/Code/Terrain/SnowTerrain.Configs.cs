@@ -39,7 +39,7 @@ public sealed partial class SnowTerrain
 
 			if ( _colliderCamera.IsValid() is false )
 				return;
-
+			
 			_colliderCamera.RenderTags = field;
 		}
 	}
@@ -52,4 +52,14 @@ public sealed partial class SnowTerrain
 	[Property]
 	[Group( "Config" )]
 	public SupportedTextureSizes HighMaskSize { get; set; } = SupportedTextureSizes.Medium;
+
+	[Property]
+	[Feature( "Chunking" )]
+	[Range( 1f, 10f ), Step( 1f )]
+	public int Division { get; set; } = 1;
+
+	[Feature( "Chunking" )]
+	[Property]
+	[ReadOnly]
+	public int ChunksCount => Division * Division;
 }
