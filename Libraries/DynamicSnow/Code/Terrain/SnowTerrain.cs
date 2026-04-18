@@ -12,6 +12,12 @@ public sealed partial class SnowTerrain : Component, Component.ExecuteInEditor
 	[RequireComponent]
 	public Sandbox.Terrain Terrain { get; set; }
 
+	protected override void OnAwake()
+	{
+		UpdateDeformation = new( UPDATE_DEFORMATION_COMPUTE );
+		UpdateSnowMask = new( UPDATE_MASK_COMPUTE );
+	}
+
 	protected override void OnEnabled()
 	{
 		if ( Game.IsPlaying is false )
@@ -38,5 +44,15 @@ public sealed partial class SnowTerrain : Component, Component.ExecuteInEditor
 		_terrainBuffer?.Dispose();
 
 		CreateTextures( disposeOnly: true );
+	}
+
+	protected override void OnUpdate()
+	{
+		Scene.RenderAttributes.SetCombo( "D_DYNAMIC_SNOW_IN_EDITOR", Game.IsPlaying is false );
+
+		if ( Game.IsPlaying is false )
+			return;
+
+		UpdateTerrain();
 	}
 }

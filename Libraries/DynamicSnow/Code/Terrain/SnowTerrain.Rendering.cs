@@ -10,23 +10,18 @@ public sealed partial class SnowTerrain
 {
 	private int HighTextureSize => HighMaskSize.AsInt();
 
+	private ComputeShader UpdateDeformation;
+	private ComputeShader UpdateSnowMask;
+
 	private GpuBuffer<SnowTerrainBuffer> _terrainBuffer;
 	private CommandList _renderList;
 
 	private bool _isMaskCleared;
 
-	protected override void OnUpdate()
+	private void UpdateTerrain()
 	{
-		Scene.RenderAttributes.SetCombo( "D_DYNAMIC_SNOW_IN_EDITOR", Game.IsPlaying is false );
-
-		if ( Game.IsPlaying is false )
-			return;
-
 		Assert.NotNull( _rawDeformationMask, "Missing deformation mask!" );
 		Assert.NotNull( _snowMask, "Missing snow mask!" );
-
-		ComputeShader updateDeformation = new( UPDATE_DEFORMATION_COMPUTE );
-		ComputeShader updateSnowMask = new( UPDATE_MASK_COMPUTE );
 
 		_renderList?.Reset();
 
@@ -49,9 +44,9 @@ public sealed partial class SnowTerrain
 			_renderList.UavBarrier( _rawDeformationMask );
 		}
 
-		_renderList.DispatchCompute( updateDeformation, HighTextureSize, HighTextureSize, 1 );
+		_renderList.DispatchCompute( UpdateDeformation, HighTextureSize, HighTextureSize, 1 );
 		_renderList.UavBarrier( _rawDeformationMask );
-		_renderList.DispatchCompute( updateSnowMask, HighTextureSize, HighTextureSize, 1 );
+		_renderList.DispatchCompute( UpdateSnowMask, HighTextureSize, HighTextureSize, 1 );
 
 		UploadToGPU();
 	}
