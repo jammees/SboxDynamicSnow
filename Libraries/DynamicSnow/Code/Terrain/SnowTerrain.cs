@@ -49,8 +49,8 @@ public sealed partial class SnowTerrain : Component, Component.ExecuteInEditor
 
 	protected override void OnAwake()
 	{
-		UpdateDeformation = new( UPDATE_DEFORMATION_COMPUTE );
-		UpdateSnowMask = new( UPDATE_MASK_COMPUTE );
+		//UpdateDeformation = new( UPDATE_DEFORMATION_COMPUTE );
+		//UpdateSnowMask = new( UPDATE_MASK_COMPUTE );
 	}
 
 	protected override void OnEnabled()
