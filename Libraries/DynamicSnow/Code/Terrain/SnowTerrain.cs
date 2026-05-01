@@ -1,5 +1,6 @@
 ﻿using Sandbox;
 using Sandbox.Rendering;
+using System.Collections.Generic;
 
 namespace Snow.Terrain;
 
@@ -11,6 +12,8 @@ public sealed partial class SnowTerrain : Component, Component.ExecuteInEditor
 	[Property]
 	[RequireComponent]
 	public Sandbox.Terrain Terrain { get; set; }
+
+	private SnowTerrainChunk[] _snowChunks;
 
 	protected override void DrawGizmos()
 	{
@@ -38,7 +41,7 @@ public sealed partial class SnowTerrain : Component, Component.ExecuteInEditor
 
 					Gizmo.Draw.LineBBox( bounds );
 
-					Gizmo.Draw.Text( $"{x+(y*Division)+1}", new Transform( bounds.Center ), size: 20f );
+					Gizmo.Draw.Text( $"{x + (y * Division) + 1}", new Transform( bounds.Center ), size: 20f );
 				}
 			}
 		}
@@ -55,15 +58,17 @@ public sealed partial class SnowTerrain : Component, Component.ExecuteInEditor
 		if ( Game.IsPlaying is false )
 			return;
 
-		CreateTextures();
-		CreateTerrainCamera();
+		CreateChunks();
 
-		_isMaskCleared = false;
+		//CreateTextures();
+		//CreateTerrainCamera();
 
-		_terrainBuffer = new( 1, GpuBuffer.UsageFlags.Structured, "SnowTerrainBuffer" );
+		//_isMaskCleared = false;
 
-		_renderList = new();
-		_colliderCamera.AddCommandList( _renderList, Stage.AfterDepthPrepass, 1000 );
+		//_terrainBuffer = new( 1, GpuBuffer.UsageFlags.Structured, "SnowTerrainBuffer" );
+
+		//_renderList = new();
+		//_colliderCamera.AddCommandList( _renderList, Stage.AfterDepthPrepass, 1000 );
 	}
 
 	protected override void OnDisabled()
@@ -71,8 +76,8 @@ public sealed partial class SnowTerrain : Component, Component.ExecuteInEditor
 		if ( Game.IsPlaying is false )
 			return;
 
-		_colliderCamera?.RemoveCommandList( _renderList );
-		_colliderCamera?.DestroyGameObject();
+		//_colliderCamera?.RemoveCommandList( _renderList );
+		//_colliderCamera?.DestroyGameObject();
 		_terrainBuffer?.Dispose();
 
 		CreateTextures( disposeOnly: true );
@@ -86,5 +91,21 @@ public sealed partial class SnowTerrain : Component, Component.ExecuteInEditor
 			return;
 
 		UpdateTerrain();
+	}
+
+	private void CreateChunks()
+	{
+		_snowChunks = new SnowTerrainChunk[Division * Division];
+
+		for ( int x = 0; x < Division; x++ )
+		{
+			for ( int y = 0; y < Division; y++ )
+			{
+				_snowChunks[x + y * Division] = new SnowTerrainChunk(
+					this,
+					new Vector2( x, y )
+				);
+			}
+		}
 	}
 }
