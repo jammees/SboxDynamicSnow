@@ -1,11 +1,10 @@
 ﻿using Sandbox;
 using Snow.Buffers;
 using Snow.Enums;
-using Snow.Terrain;
 using System;
 using System.Text.Json.Serialization;
 
-namespace Snow;
+namespace Snow.Terrain;
 
 public sealed partial class SnowTerrain : Component, Component.ExecuteInEditor
 {
