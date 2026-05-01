@@ -1,6 +1,7 @@
 ﻿using Sandbox;
 using Snow.Enums;
 using System;
+using System.Text.Json.Serialization;
 
 namespace Snow.Terrain;
 
@@ -61,5 +62,6 @@ public sealed partial class SnowTerrain
 	[Feature( "Chunking" )]
 	[Property]
 	[ReadOnly]
+	[JsonIgnore]
 	public int ChunksCount => Division * Division;
 }
