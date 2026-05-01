@@ -688,7 +688,7 @@
           "__guid": "b015bddf-1d35-4223-9c01-1e38b6ca02ce",
           "__enabled": true,
           "Flags": 0,
-          "Division": 2,
+          "Division": 1,
           "HighMaskSize": "Medium",
           "OnComponentDestroy": null,
           "OnComponentDisabled": null,
