@@ -4,37 +4,37 @@ namespace Snow.Terrain;
 
 internal sealed partial class SnowTerrainChunk
 {
-	private CameraComponent _colliderCamera;
+	internal CameraComponent ColliderCamera;
 
 	private void CreateTerrainCamera()
 	{
 		GameObject cameraContainer = new( SnowTerrain.Terrain.GameObject, true, "CameraContainer" );
 
-		_colliderCamera = cameraContainer.AddComponent<CameraComponent>();
-		_colliderCamera.IsMainCamera = false;
-		_colliderCamera.Orthographic = true;
-		_colliderCamera.ZNear = 0;
-		_colliderCamera.OrthographicHeight = TerrainStorage.TerrainSize / SnowTerrain.Division;
-		_colliderCamera.LocalRotation = Rotation.From( new Angles( -90f, 90f, 0f ) );
-		_colliderCamera.BackgroundColor = Color.Black;
-		_colliderCamera.EnablePostProcessing = false;
-		_colliderCamera.RenderTags = SnowTerrain.SnowColliderTags;
+		ColliderCamera = cameraContainer.AddComponent<CameraComponent>();
+		ColliderCamera.IsMainCamera = false;
+		ColliderCamera.Orthographic = true;
+		ColliderCamera.ZNear = 0;
+		ColliderCamera.OrthographicHeight = TerrainStorage.TerrainSize / SnowTerrain.Division;
+		ColliderCamera.LocalRotation = Rotation.From( new Angles( -90f, 90f, 0f ) );
+		ColliderCamera.BackgroundColor = Color.Black;
+		ColliderCamera.EnablePostProcessing = false;
+		ColliderCamera.RenderTags = SnowTerrain.SnowColliderTags;
 
-		_colliderCamera.CustomSize = new Vector2( HighTextureSize, HighTextureSize);
-		_colliderCamera.RenderTarget = _renderTarget;
+		ColliderCamera.CustomSize = new Vector2( HighTextureSize, HighTextureSize);
+		ColliderCamera.RenderTarget = _renderTarget;
 
 		UpdateTerrainCameraPosition();
 	}
 
-	private void UpdateTerrainCameraPosition()
+	internal void UpdateTerrainCameraPosition()
 	{
-		if ( _colliderCamera.IsValid() is false )
+		if ( ColliderCamera.IsValid() is false )
 			return;
 
 		Vector3 boundsCenter = Bounds.Center;
 		boundsCenter.z = 0f;
 
-		_colliderCamera.LocalPosition = boundsCenter;
-		_colliderCamera.ZFar = TerrainStorage.TerrainHeight + SnowTerrain.SnowHeight;
+		ColliderCamera.LocalPosition = boundsCenter;
+		ColliderCamera.ZFar = TerrainStorage.TerrainHeight + SnowTerrain.SnowHeight;
 	}
 }

@@ -1,9 +1,10 @@
 ﻿using Sandbox;
 using Snow.Enums;
+using Snow.Terrain;
 using System;
 using System.Text.Json.Serialization;
 
-namespace Snow.Terrain;
+namespace Snow;
 
 public sealed partial class SnowTerrain : Component, Component.ExecuteInEditor
 {
@@ -21,8 +22,14 @@ public sealed partial class SnowTerrain : Component, Component.ExecuteInEditor
 		set
 		{
 			field = MathF.Max( value, 0f );
-			//UpdateTerrainCameraPosition();
-			Log.Warning( "UNIMPLEMENTED: Update chunk camera positions!" );
+
+			if ( _snowChunks is null )
+				return;
+
+			foreach ( SnowTerrainChunk chunk in _snowChunks )
+			{
+				chunk.UpdateTerrainCameraPosition();
+			}
 		}
 	}
 
@@ -39,11 +46,13 @@ public sealed partial class SnowTerrain : Component, Component.ExecuteInEditor
 		{
 			field = value;
 
-			//if ( _colliderCamera.IsValid() is false )
-			//	return;
+			if ( _snowChunks is null )
+				return;
 
-			//_colliderCamera.RenderTags = field;
-			Log.Warning( "UNIMPLEMENTED: Update chunk camera rendertags!" );
+			foreach ( SnowTerrainChunk chunk in _snowChunks )
+			{
+				chunk.ColliderCamera.RenderTags = field;
+			}
 		}
 	}
 

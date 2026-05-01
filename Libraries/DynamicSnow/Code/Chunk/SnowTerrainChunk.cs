@@ -28,7 +28,7 @@ internal sealed partial class SnowTerrainChunk
 		_terrainBuffer = new( 1, GpuBuffer.UsageFlags.Structured, "SnowTerrainBuffer" );
 
 		_renderList = new();
-		_colliderCamera.AddCommandList( _renderList, Stage.AfterDepthPrepass, 1000 );
+		ColliderCamera.AddCommandList( _renderList, Stage.AfterDepthPrepass, 1000 );
 	}
 
 	~SnowTerrainChunk()
