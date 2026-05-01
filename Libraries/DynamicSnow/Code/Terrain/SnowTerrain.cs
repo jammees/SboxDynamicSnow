@@ -45,28 +45,12 @@ public sealed partial class SnowTerrain : Component, Component.ExecuteInEditor
 		}
 	}
 
-	protected override void OnAwake()
-	{
-		//UpdateDeformation = new( UPDATE_DEFORMATION_COMPUTE );
-		//UpdateSnowMask = new( UPDATE_MASK_COMPUTE );
-	}
-
 	protected override void OnEnabled()
 	{
 		if ( Game.IsPlaying is false )
 			return;
 
 		CreateChunks();
-
-		//CreateTextures();
-		//CreateTerrainCamera();
-
-		//_isMaskCleared = false;
-
-		//_terrainBuffer = new( 1, GpuBuffer.UsageFlags.Structured, "SnowTerrainBuffer" );
-
-		//_renderList = new();
-		//_colliderCamera.AddCommandList( _renderList, Stage.AfterDepthPrepass, 1000 );
 	}
 
 	protected override void OnDisabled()
@@ -74,11 +58,7 @@ public sealed partial class SnowTerrain : Component, Component.ExecuteInEditor
 		if ( Game.IsPlaying is false )
 			return;
 
-		//_colliderCamera?.RemoveCommandList( _renderList );
-		//_colliderCamera?.DestroyGameObject();
-		//_terrainBuffer?.Dispose();
-
-		//CreateTextures( disposeOnly: true );
+		Log.Error( "TODO: Dispose chunks!" );
 	}
 
 	protected override void OnUpdate()
@@ -88,7 +68,10 @@ public sealed partial class SnowTerrain : Component, Component.ExecuteInEditor
 		if ( Game.IsPlaying is false )
 			return;
 
-		UpdateTerrain();
+		foreach ( SnowTerrainChunk chunk in _snowChunks )
+		{
+			chunk.Update();
+		}
 	}
 
 	private void CreateChunks()
