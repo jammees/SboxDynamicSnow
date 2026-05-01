@@ -15,6 +15,7 @@ internal sealed partial class SnowTerrainChunk
 		Id = id;
 
 		CreateBounds( id );
+		CreateTextures();
 		CreateTerrainCamera();
 	}
 

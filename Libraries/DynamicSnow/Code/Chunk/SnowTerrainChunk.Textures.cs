@@ -2,20 +2,17 @@
 
 namespace Snow.Terrain;
 
-public sealed partial class SnowTerrain
+internal sealed partial class SnowTerrainChunk
 {
+	internal int HighTextureSize => SnowTerrain.HighMaskSize.AsInt();
+
 	private Texture _rawDeformationMask;
 	private Texture _snowMask;
 	private Texture _renderTarget;
 
-	private void CreateTextures( bool disposeOnly = false )
+	private void CreateTextures()
 	{
-		_rawDeformationMask?.Dispose();
-		_snowMask?.Dispose();
-		_renderTarget?.Dispose();
-
-		if ( disposeOnly is true )
-			return;
+		DisposeTextures();
 
 		_rawDeformationMask = Texture.Create( HighTextureSize, HighTextureSize, ImageFormat.R16 )
 			.WithName( "RawDeformationSnowMask" )
@@ -36,5 +33,12 @@ public sealed partial class SnowTerrain
 			.WithSize( HighTextureSize, HighTextureSize )
 			.WithFormat( ImageFormat.A8 )
 			.Create( name: "SnowColliderRenderTarget", anonymous: false );
+	}
+
+	private void DisposeTextures()
+	{
+		_rawDeformationMask?.Dispose();
+		_snowMask?.Dispose();
+		_renderTarget?.Dispose();
 	}
 }
