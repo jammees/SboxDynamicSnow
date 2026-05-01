@@ -21,7 +21,8 @@ public sealed partial class SnowTerrain
 		set
 		{
 			field = MathF.Max( value, 0f );
-			UpdateTerrainCameraPosition();
+			//UpdateTerrainCameraPosition();
+			Log.Warning( "UNIMPLEMENTED: Update chunk camera positions!" );
 		}
 	}
 
@@ -38,10 +39,11 @@ public sealed partial class SnowTerrain
 		{
 			field = value;
 
-			if ( _colliderCamera.IsValid() is false )
-				return;
-			
-			_colliderCamera.RenderTags = field;
+			//if ( _colliderCamera.IsValid() is false )
+			//	return;
+
+			//_colliderCamera.RenderTags = field;
+			Log.Warning( "UNIMPLEMENTED: Update chunk camera rendertags!" );
 		}
 	}
 
