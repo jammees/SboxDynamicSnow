@@ -25,21 +25,23 @@ internal sealed partial class SnowTerrainChunk
 
 		_isMaskCleared = false;
 
-		_terrainBuffer = new( 1, GpuBuffer.UsageFlags.Structured, "SnowTerrainBuffer" );
-
 		_renderList = new();
 		ColliderCamera.AddCommandList( _renderList, Stage.AfterDepthPrepass, 1000 );
 	}
 
-	~SnowTerrainChunk()
-	{
-	}
-
 	public void Update()
 	{
-		Assert.NotNull( _rawDeformationMask, "Missing deformation mask!" );
-		Assert.NotNull( _snowMask, "Missing snow mask!" );
+		Assert.NotNull( RawDeformationMask, "Missing deformation mask!" );
+		Assert.NotNull( SnowMask, "Missing snow mask!" );
 
-		UpdateTerrain();
+		UpdateInternal();
+	}
+
+	public void Destroy()
+	{
+		ColliderCamera?.RemoveCommandList( _renderList );
+		ColliderCamera?.Destroy();
+
+		DisposeTextures();
 	}
 }

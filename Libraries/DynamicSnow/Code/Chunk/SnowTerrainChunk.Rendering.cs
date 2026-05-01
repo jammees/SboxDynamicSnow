@@ -11,23 +11,22 @@ internal sealed partial class SnowTerrainChunk
 	private ComputeShader UpdateDeformation;
 	private ComputeShader UpdateSnowMask;
 
-	private GpuBuffer<SnowTerrainBuffer> _terrainBuffer;
 	private CommandList _renderList;
 
 	private bool _isMaskCleared;
 
-	private void UpdateTerrain()
+	private void UpdateInternal()
 	{
 		_renderList?.Reset();
 
 		// probably should just pass in the texture indexes instead of the actual texture
-		_renderList.Attributes.Set( "DeformationMask", _rawDeformationMask );
+		_renderList.Attributes.Set( "DeformationMask", RawDeformationMask );
 		_renderList.Attributes.Set( "TerrainHeightmap", Terrain.HeightMap );
 		_renderList.Attributes.Set( "TerrainControl", Terrain.ControlMap );
 		_renderList.Attributes.Set( "SnowHeight", SnowTerrain.SnowHeight );
 		_renderList.Attributes.Set( "TerrainHeight", TerrainStorage.TerrainHeight );
 		_renderList.Attributes.Set( "HeightmapUvScale", GetInverseDimensionSize() );
-		_renderList.Attributes.Set( "SnowMask", _snowMask );
+		_renderList.Attributes.Set( "SnowMask", SnowMask );
 
 		if ( _isMaskCleared is false )
 		{
@@ -36,25 +35,14 @@ internal sealed partial class SnowTerrainChunk
 			_isMaskCleared = true;
 
 			_renderList.DispatchCompute( clearDeformation, HighTextureSize, HighTextureSize, 1 );
-			_renderList.UavBarrier( _rawDeformationMask );
+			_renderList.UavBarrier( RawDeformationMask );
 		}
 
 		_renderList.DispatchCompute( UpdateDeformation, HighTextureSize, HighTextureSize, 1 );
-		_renderList.UavBarrier( _rawDeformationMask );
+		_renderList.UavBarrier( RawDeformationMask );
 		_renderList.DispatchCompute( UpdateSnowMask, HighTextureSize, HighTextureSize, 1 );
 
-		UploadToGPU();
-	}
-
-	private void UploadToGPU()
-	{
-		SnowTerrainBuffer bufferData = new()
-		{
-			Mask = _snowMask.Index,
-			SnowHeight = SnowTerrain.SnowHeight,
-		};
-		_terrainBuffer.SetData( new List<SnowTerrainBuffer>() { bufferData } );
-		SnowTerrain.Scene.RenderAttributes.Set( "SnowTerrainBuffer", _terrainBuffer );
+		//UploadToGPU();
 	}
 
 	private float GetInverseDimensionSize()

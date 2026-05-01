@@ -1,4 +1,5 @@
 ﻿using Sandbox;
+using Snow.Buffers;
 using Snow.Enums;
 using Snow.Terrain;
 using System;
@@ -88,6 +89,8 @@ public sealed partial class SnowTerrain : Component, Component.ExecuteInEditor
 	public Sandbox.Terrain Terrain { get; set; }
 
 	private SnowTerrainChunk[] _snowChunks;
+	private GpuBuffer<SnowTerrainBuffer> _terrainBuffer;
+	private GpuBuffer<int> _terrainMasks;
 
 	protected override void DrawGizmos()
 	{
@@ -126,6 +129,9 @@ public sealed partial class SnowTerrain : Component, Component.ExecuteInEditor
 		if ( Game.IsPlaying is false )
 			return;
 
+		_terrainBuffer = new( 1, debugName: "Terrain Buffer" );
+		_terrainMasks = new( 64, debugName: "Terrain Masks" );
+
 		CreateChunks();
 	}
 
@@ -134,7 +140,13 @@ public sealed partial class SnowTerrain : Component, Component.ExecuteInEditor
 		if ( Game.IsPlaying is false )
 			return;
 
-		Log.Error( "TODO: Dispose chunks!" );
+		_terrainBuffer?.Dispose();
+		_terrainMasks?.Dispose();
+
+		foreach ( SnowTerrainChunk chunk in _snowChunks )
+		{
+			chunk.Destroy();
+		}
 	}
 
 	protected override void OnUpdate()
@@ -148,6 +160,17 @@ public sealed partial class SnowTerrain : Component, Component.ExecuteInEditor
 		{
 			chunk.Update();
 		}
+	}
+
+	private void UploadToGPU()
+	{
+		//SnowTerrainBuffer bufferData = new()
+		//{
+		//	Mask = _snowMask.Index,
+		//	SnowHeight = SnowTerrain.SnowHeight,
+		//};
+		//_terrainBuffer.SetData( new List<SnowTerrainBuffer>() { bufferData } );
+		//SnowTerrain.Scene.RenderAttributes.Set( "SnowTerrainBuffer", _terrainBuffer );
 	}
 
 	private void CreateChunks()

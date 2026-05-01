@@ -8,7 +8,7 @@ internal struct SnowTerrainBuffer
 	/// <summary>
 	/// Index of the snow mask
 	/// </summary>
-	public int Mask;
+	public int ControlMaskIndex;
 
 	/// <summary>
 	/// How tall is the snow

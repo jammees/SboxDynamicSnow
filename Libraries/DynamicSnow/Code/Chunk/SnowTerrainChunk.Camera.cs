@@ -21,7 +21,7 @@ internal sealed partial class SnowTerrainChunk
 		ColliderCamera.RenderTags = SnowTerrain.SnowColliderTags;
 
 		ColliderCamera.CustomSize = new Vector2( HighTextureSize, HighTextureSize);
-		ColliderCamera.RenderTarget = _renderTarget;
+		ColliderCamera.RenderTarget = RenderTarget;
 
 		UpdateTerrainCameraPosition();
 	}
