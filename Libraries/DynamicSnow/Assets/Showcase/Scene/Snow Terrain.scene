@@ -688,8 +688,7 @@
           "__guid": "b015bddf-1d35-4223-9c01-1e38b6ca02ce",
           "__enabled": true,
           "Flags": 0,
-          "ChunksCount": 9,
-          "Division": 3,
+          "Division": 2,
           "HighMaskSize": "Medium",
           "OnComponentDestroy": null,
           "OnComponentDisabled": null,
@@ -1048,6 +1047,11 @@
       "CustomBounds": false
     },
     "GameObjectSystems": {
+      "Sandbox.SelectionSetsSystem": {
+        "Data": {
+          "SelectionSets": []
+        }
+      },
       "Sandbox.Clutter.ClutterGridSystem": {
         "Storage": {
           "$blob": "691ea7a6-5dba-49c5-8d47-f7a16d2ee51b"
