@@ -1,6 +1,4 @@
 ﻿using Sandbox;
-using Sandbox.Rendering;
-using System.Collections.Generic;
 
 namespace Snow.Terrain;
 
@@ -78,9 +76,9 @@ public sealed partial class SnowTerrain : Component, Component.ExecuteInEditor
 
 		//_colliderCamera?.RemoveCommandList( _renderList );
 		//_colliderCamera?.DestroyGameObject();
-		_terrainBuffer?.Dispose();
+		//_terrainBuffer?.Dispose();
 
-		CreateTextures( disposeOnly: true );
+		//CreateTextures( disposeOnly: true );
 	}
 
 	protected override void OnUpdate()
