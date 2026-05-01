@@ -20,10 +20,8 @@ internal sealed partial class SnowTerrainChunk
 		_colliderCamera.EnablePostProcessing = false;
 		_colliderCamera.RenderTags = SnowTerrain.SnowColliderTags;
 
-		_colliderCamera.CustomSize = new Vector2( 1024, 1024 );
-
-		//_colliderCamera.CustomSize = new Vector2( SnowTerrain.HighMaskSize, SnowTerrain.HighTextureSize );
-		//_colliderCamera.RenderTarget = _renderTarget;
+		_colliderCamera.CustomSize = new Vector2( HighTextureSize, HighTextureSize);
+		_colliderCamera.RenderTarget = _renderTarget;
 
 		UpdateTerrainCameraPosition();
 	}
