@@ -688,7 +688,7 @@
           "__guid": "6442b5e3-92d3-4e50-8b69-c5f258c38b97",
           "__enabled": true,
           "Flags": 0,
-          "Division": 1,
+          "Division": 2,
           "HighMaskSize": "Medium",
           "OnComponentDestroy": null,
           "OnComponentDisabled": null,
@@ -1149,13 +1149,13 @@
           "SelectionSets": []
         }
       },
+      "Sandbox.MovieMaker.MovieRecorderSystem": {
+        "DisableClientRecording": false
+      },
       "Sandbox.Clutter.ClutterGridSystem": {
         "Storage": {
           "$blob": "691ea7a6-5dba-49c5-8d47-f7a16d2ee51b"
         }
-      },
-      "Sandbox.MovieMaker.MovieRecorderSystem": {
-        "DisableClientRecording": false
       }
     }
   },
