@@ -39,6 +39,22 @@ public sealed class Pickup : Component
 
 	protected override void OnUpdate()
 	{
+		float division = 2f;
+		float size = 3000f;
+
+		float unitSize = size / division;
+
+		Vector3 var1 = WorldPosition / unitSize;
+
+		DebugOverlay.ScreenText( new Vector2(25f, 100f), $"Var1: {var1}", flags: TextFlag.LeftCenter );
+
+		float idX = var1.x.FloorToInt();
+		float idY = var1.y.FloorToInt();
+
+		DebugOverlay.ScreenText( new Vector2( 25f, 130f ), $"x: {idX} y: {idY}", flags: TextFlag.LeftCenter );
+
+		DebugOverlay.ScreenText( new Vector2( 25f, 160f ), $"id: {idX + idY * division}", flags: TextFlag.LeftCenter );
+
 		if ( IsProxy )
 			return;
 
