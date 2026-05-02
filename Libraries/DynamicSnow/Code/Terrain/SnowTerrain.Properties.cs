@@ -71,7 +71,7 @@ public sealed partial class SnowTerrain
 	/// </summary>
 	[Property]
 	[Group( "Chunking" )]
-	[Range( 1f, 10f ), Step( 1f )]
+	[Range( 1f, 8f ), Step( 1f )]
 	public int Division { get; set; } = 1;
 
 	[Property]
