@@ -13,7 +13,6 @@ public sealed partial class SnowTerrain : Component, Component.ExecuteInEditor
 	public Sandbox.Terrain Terrain { get; set; }
 
 	private SnowTerrainChunk[] _snowChunks;
-	
 
 	protected override void DrawGizmos()
 	{
