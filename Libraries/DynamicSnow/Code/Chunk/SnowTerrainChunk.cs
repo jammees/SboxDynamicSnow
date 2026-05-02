@@ -39,8 +39,7 @@ internal sealed partial class SnowTerrainChunk
 
 	public void Destroy()
 	{
-		ColliderCamera?.RemoveCommandList( _renderList );
-		ColliderCamera?.Destroy();
+		ColliderCamera?.DestroyGameObject();
 
 		DisposeTextures();
 	}
