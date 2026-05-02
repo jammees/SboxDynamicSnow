@@ -33,6 +33,10 @@ internal sealed partial class SnowTerrainChunk
 			.WithSize( HighTextureSize, HighTextureSize )
 			.WithFormat( ImageFormat.A8 )
 			.Create( name: $"SnowColliderRenderTarget{Id}", anonymous: false );
+
+		SnowTerrain.ChunkMasks[Id] = SnowMask.Index;
+
+		Log.Warning( $"[{Id}] Assigned mask with index {SnowMask.Index}" );
 	}
 
 	private void DisposeTextures()

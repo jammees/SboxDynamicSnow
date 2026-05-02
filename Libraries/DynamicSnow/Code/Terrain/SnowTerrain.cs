@@ -1,5 +1,4 @@
 ﻿using Sandbox;
-using Snow.Buffers;
 
 namespace Snow.Terrain;
 
@@ -11,6 +10,8 @@ public sealed partial class SnowTerrain : Component, Component.ExecuteInEditor
 	[Property]
 	[RequireComponent]
 	public Sandbox.Terrain Terrain { get; set; }
+
+	internal int[] ChunkMasks;
 
 	private SnowTerrainChunk[] _snowChunks;
 
@@ -50,6 +51,8 @@ public sealed partial class SnowTerrain : Component, Component.ExecuteInEditor
 	{
 		if ( Game.IsPlaying is false )
 			return;
+
+		ChunkMasks = new int[ChunksCount];
 
 		CreateBuffers();
 		CreateChunks();
