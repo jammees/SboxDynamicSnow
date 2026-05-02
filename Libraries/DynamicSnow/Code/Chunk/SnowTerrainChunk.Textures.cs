@@ -15,14 +15,14 @@ internal sealed partial class SnowTerrainChunk
 		DisposeTextures();
 
 		RawDeformationMask = Texture.Create( HighTextureSize, HighTextureSize, ImageFormat.R16 )
-			.WithName( "RawDeformationSnowMask" )
+			.WithName( $"RawDeformationSnowMask{Id}" )
 			.WithAnonymous( false )
 			.WithGPUOnlyUsage()
 			.WithUAVBinding()
 			.Finish();
 
 		SnowMask = Texture.Create( HighTextureSize, HighTextureSize, ImageFormat.A8 )
-			.WithName( "ProcessedSnowMask" )
+			.WithName( $"ProcessedSnowMask{Id}" )
 			.WithAnonymous( false )
 			.WithGPUOnlyUsage()
 			.WithUAVBinding()
@@ -32,7 +32,7 @@ internal sealed partial class SnowTerrainChunk
 			.WithMSAA( MultisampleAmount.MultisampleNone )
 			.WithSize( HighTextureSize, HighTextureSize )
 			.WithFormat( ImageFormat.A8 )
-			.Create( name: "SnowColliderRenderTarget", anonymous: false );
+			.Create( name: $"SnowColliderRenderTarget{Id}", anonymous: false );
 	}
 
 	private void DisposeTextures()
