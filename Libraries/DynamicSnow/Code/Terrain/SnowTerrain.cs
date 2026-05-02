@@ -99,12 +99,11 @@ public sealed partial class SnowTerrain : Component, Component.ExecuteInEditor
 
 	private void UploadToGPU()
 	{
-		//SnowTerrainBuffer bufferData = new()
-		//{
-		//	Mask = _snowMask.Index,
-		//	SnowHeight = SnowTerrain.SnowHeight,
-		//};
-		//_terrainBuffer.SetData( new List<SnowTerrainBuffer>() { bufferData } );
-		//SnowTerrain.Scene.RenderAttributes.Set( "SnowTerrainBuffer", _terrainBuffer );
+		SnowTerrainBuffer bufferData = new()
+		{
+			InverseUnitChunkSize = 1f / Terrain.Storage.TerrainSize / Division,
+			SnowHeight = SnowHeight
+		};
+		_terrainBuffer.SetData( new List<SnowTerrainBuffer>() { bufferData } );
 	}
 }
