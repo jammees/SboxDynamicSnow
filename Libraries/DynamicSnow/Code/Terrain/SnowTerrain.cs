@@ -13,8 +13,7 @@ public sealed partial class SnowTerrain : Component, Component.ExecuteInEditor
 	public Sandbox.Terrain Terrain { get; set; }
 
 	private SnowTerrainChunk[] _snowChunks;
-	private GpuBuffer<SnowTerrainBuffer> _terrainBuffer;
-	private GpuBuffer<int> _terrainMasks;
+	
 
 	protected override void DrawGizmos()
 	{
@@ -53,9 +52,7 @@ public sealed partial class SnowTerrain : Component, Component.ExecuteInEditor
 		if ( Game.IsPlaying is false )
 			return;
 
-		_terrainBuffer = new( 1, debugName: "Terrain Buffer" );
-		_terrainMasks = new( 64, debugName: "Terrain Masks" );
-
+		CreateBuffers();
 		CreateChunks();
 	}
 
@@ -64,8 +61,7 @@ public sealed partial class SnowTerrain : Component, Component.ExecuteInEditor
 		if ( Game.IsPlaying is false )
 			return;
 
-		_terrainBuffer?.Dispose();
-		_terrainMasks?.Dispose();
+		DisposeBuffers();
 
 		foreach ( SnowTerrainChunk chunk in _snowChunks )
 		{
