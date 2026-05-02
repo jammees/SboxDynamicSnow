@@ -2,7 +2,6 @@
 using Sandbox.Rendering;
 using Snow.Buffers;
 using Snow.Utility;
-using System.Collections.Generic;
 
 namespace Snow.Terrain;
 
@@ -13,7 +12,7 @@ internal sealed partial class SnowTerrainChunk
 
 	private CommandList _renderList;
 
-	private bool _isMaskCleared;
+	private bool _isMaskCleared = false;
 
 	private void UpdateInternal()
 	{
@@ -41,14 +40,18 @@ internal sealed partial class SnowTerrainChunk
 		_renderList.DispatchCompute( UpdateDeformation, HighTextureSize, HighTextureSize, 1 );
 		_renderList.UavBarrier( RawDeformationMask );
 		_renderList.DispatchCompute( UpdateSnowMask, HighTextureSize, HighTextureSize, 1 );
-
-		//UploadToGPU();
 	}
 
 	private float GetInverseDimensionSize()
 	{
 		float heightmapResolution = TerrainStorage.Resolution;
 		return heightmapResolution / (float)HighTextureSize;
+	}
+
+	private void SetupRenderlist()
+	{
+		_renderList = new();
+		ColliderCamera.AddCommandList( _renderList, Stage.AfterDepthPrepass, 1000 );
 	}
 
 	private void CreateComputes()

@@ -22,11 +22,7 @@ internal sealed partial class SnowTerrainChunk
 		CreateComputes();
 		CreateTextures();
 		CreateTerrainCamera();
-
-		_isMaskCleared = false;
-
-		_renderList = new();
-		ColliderCamera.AddCommandList( _renderList, Stage.AfterDepthPrepass, 1000 );
+		SetupRenderlist();
 	}
 
 	public void Update()
