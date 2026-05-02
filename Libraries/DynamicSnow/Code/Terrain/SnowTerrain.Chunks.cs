@@ -4,7 +4,7 @@ public sealed partial class SnowTerrain
 {
 	private void CreateChunks()
 	{
-		_snowChunks = new SnowTerrainChunk[Division * Division];
+		_snowChunks = new SnowTerrainChunk[ChunksCount];
 
 		for ( int x = 0; x < Division; x++ )
 		{
