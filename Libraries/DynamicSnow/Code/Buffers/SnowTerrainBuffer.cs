@@ -6,9 +6,10 @@ namespace Snow.Buffers;
 internal struct SnowTerrainBuffer
 {
 	/// <summary>
-	/// Index of the snow mask
+	/// The inverse of how large of a 1 dimensional
+	/// area does a chunk account for
 	/// </summary>
-	public int ControlMaskIndex;
+	public float InverseUnitChunkSize;
 
 	/// <summary>
 	/// How tall is the snow
