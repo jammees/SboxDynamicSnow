@@ -1,4 +1,6 @@
 ﻿using Sandbox;
+using Snow.Buffers;
+using System.Collections.Generic;
 
 namespace Snow.Terrain;
 
