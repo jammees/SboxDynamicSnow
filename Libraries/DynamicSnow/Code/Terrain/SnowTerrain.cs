@@ -1,5 +1,6 @@
 ﻿using Sandbox;
 using Snow.Buffers;
+using Snow.Utility;
 using System.Collections.Generic;
 
 namespace Snow.Terrain;
@@ -95,6 +96,20 @@ public sealed partial class SnowTerrain : Component, Component.ExecuteInEditor
 		{
 			chunk.Update();
 		}
+
+		DrawDebug();
+	}
+
+	private void DrawDebug()
+	{
+		DebugSystem debug = DebugSystem.Current;
+		debug.Add( "Masks:" );
+		for ( int i = 0; i < ChunkMasks.Length; i++ )
+		{
+			debug.Add( $"     [{i}] {ChunkMasks[i]}" );
+		}
+		debug.Add( $"Chunks: {Division * Division}" );
+		debug.Add( $"Inverse Unit Chunk: {1f / (Terrain.Storage.TerrainSize / Division)}" );
 	}
 
 	private void UploadToGPU()
