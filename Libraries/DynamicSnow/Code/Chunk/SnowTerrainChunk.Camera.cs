@@ -8,7 +8,7 @@ internal sealed partial class SnowTerrainChunk
 
 	private void CreateTerrainCamera()
 	{
-		GameObject cameraContainer = new( SnowTerrain.Terrain.GameObject, true, "CameraContainer" );
+		GameObject cameraContainer = new( SnowTerrain.Terrain.GameObject, true, $"CameraContainer-{Id}" );
 
 		ColliderCamera = cameraContainer.AddComponent<CameraComponent>();
 		ColliderCamera.IsMainCamera = false;
