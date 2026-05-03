@@ -49,7 +49,6 @@ class SnowTerrain
         out float3 TangentV
     )
     {
-        SnowTerrainBuffer terrainData = Get();
 
         Texture2D snowMask = Bindless::GetTexture2D( terrainData.Mask, false );
 
@@ -81,6 +80,7 @@ class SnowTerrain
 
         // Normal strength needs to take in account terrain dimensions rather than just texel scale
         #if ( D_DYNAMIC_SNOW_IN_EDITOR == NOT_IN_EDITOR )
+            SnowTerrainBuffer terrainData = Get();
             float overallHeight = terrainHeight + terrainData.SnowHeight;
             float normalStrength = overallHeight / Terrain::Get(  ).Resolution;
 
