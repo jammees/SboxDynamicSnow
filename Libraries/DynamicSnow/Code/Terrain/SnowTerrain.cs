@@ -101,9 +101,12 @@ public sealed partial class SnowTerrain : Component, Component.ExecuteInEditor
 	{
 		SnowTerrainBuffer bufferData = new()
 		{
-			InverseUnitChunkSize = 1f / Terrain.Storage.TerrainSize / Division,
-			SnowHeight = SnowHeight
+			InverseUnitChunkSize = 1f / (Terrain.Storage.TerrainSize / Division),
+			SnowHeight = SnowHeight,
+			Division = Division,
+			TerrainSize = Terrain.Storage.TerrainSize,
 		};
+
 		_terrainBuffer.SetData( new List<SnowTerrainBuffer>() { bufferData } );
 	}
 }

@@ -16,7 +16,10 @@ internal struct SnowTerrainBuffer
 	/// </summary>
 	public float SnowHeight;
 
-	public float Padding1;
+	/// <summary>
+	/// Chunk division
+	/// </summary>
+	public float Division;
 
-	public float Padding2;
+	public float TerrainSize;
 }
