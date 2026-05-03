@@ -11,10 +11,10 @@ DynamicCombo( D_DYNAMIC_SNOW_IN_EDITOR, 0..1, sys( all ) );
 
 struct SnowTerrainBuffer
 {
-    int Mask;
+    float InverseUnitChunkSize;
     float SnowHeight;
-    float Padding1;
-    float Padding2;
+    float Division;
+    float TerrainSize;
 };
 
 StructuredBuffer<SnowTerrainBuffer> g_bSnowTerrain < Attribute( TERRAIN_SNOW_BUFFER_ATTR ); >;
