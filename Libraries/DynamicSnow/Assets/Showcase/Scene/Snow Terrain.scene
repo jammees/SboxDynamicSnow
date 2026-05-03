@@ -689,7 +689,7 @@
           "__enabled": true,
           "Flags": 0,
           "Division": 2,
-          "HighMaskSize": "Medium",
+          "HighMaskSize": "Tiny",
           "OnComponentDestroy": null,
           "OnComponentDisabled": null,
           "OnComponentEnabled": null,
@@ -706,104 +706,7 @@
           }
         }
       ],
-      "Children": [
-        {
-          "__guid": "fb367a92-7813-448f-bc81-cca5069dbacd",
-          "__version": 2,
-          "Flags": 0,
-          "Name": "CameraContainer",
-          "Position": "1500,1500,0",
-          "Rotation": "0.49999997,-0.49999997,0.49999997,0.49999997",
-          "Scale": "1,1,1",
-          "Tags": "",
-          "Enabled": true,
-          "NetworkMode": 2,
-          "NetworkFlags": 0,
-          "NetworkOrphaned": 0,
-          "NetworkTransmit": true,
-          "OwnerTransfer": 1,
-          "Components": [
-            {
-              "__type": "Sandbox.CameraComponent",
-              "__guid": "b4d12ec2-b285-4bb2-8b2b-229082201553",
-              "__enabled": true,
-              "Flags": 0,
-              "BackgroundColor": "0,0,0,1",
-              "ClearFlags": "All",
-              "EnablePostProcessing": false,
-              "FieldOfView": 60,
-              "FovAxis": "Horizontal",
-              "IsMainCamera": false,
-              "OnComponentDestroy": null,
-              "OnComponentDisabled": null,
-              "OnComponentEnabled": null,
-              "OnComponentFixedUpdate": null,
-              "OnComponentStart": null,
-              "OnComponentUpdate": null,
-              "Orthographic": true,
-              "OrthographicHeight": 3000,
-              "PostProcessAnchor": null,
-              "Priority": 1,
-              "RenderExcludeTags": "",
-              "RenderTags": null,
-              "RenderTexture": null,
-              "TargetEye": "None",
-              "Viewport": "0,0,1,1",
-              "ZFar": 500,
-              "ZNear": 0
-            }
-          ],
-          "Children": []
-        },
-        {
-          "__guid": "e62d7657-686e-484f-ad05-41cf32d5fa93",
-          "__version": 2,
-          "Flags": 0,
-          "Name": "CameraContainer",
-          "Position": "1500,1500,0",
-          "Rotation": "0.49999997,-0.49999997,0.49999997,0.49999997",
-          "Scale": "1,1,1",
-          "Tags": "",
-          "Enabled": true,
-          "NetworkMode": 2,
-          "NetworkFlags": 0,
-          "NetworkOrphaned": 0,
-          "NetworkTransmit": true,
-          "OwnerTransfer": 1,
-          "Components": [
-            {
-              "__type": "Sandbox.CameraComponent",
-              "__guid": "7cf368dd-b14e-45f3-83d0-7b4cdb2dc093",
-              "__enabled": true,
-              "Flags": 0,
-              "BackgroundColor": "0,0,0,1",
-              "ClearFlags": "All",
-              "EnablePostProcessing": false,
-              "FieldOfView": 60,
-              "FovAxis": "Horizontal",
-              "IsMainCamera": false,
-              "OnComponentDestroy": null,
-              "OnComponentDisabled": null,
-              "OnComponentEnabled": null,
-              "OnComponentFixedUpdate": null,
-              "OnComponentStart": null,
-              "OnComponentUpdate": null,
-              "Orthographic": true,
-              "OrthographicHeight": 3000,
-              "PostProcessAnchor": null,
-              "Priority": 1,
-              "RenderExcludeTags": "",
-              "RenderTags": null,
-              "RenderTexture": null,
-              "TargetEye": "None",
-              "Viewport": "0,0,1,1",
-              "ZFar": 530.1,
-              "ZNear": 0
-            }
-          ],
-          "Children": []
-        }
-      ]
+      "Children": []
     },
     {
       "__guid": "c9db66b4-1a0e-4de5-85d2-2994f6d825d3",
@@ -1147,11 +1050,6 @@
       "Sandbox.SelectionSetsSystem": {
         "Data": {
           "SelectionSets": []
-        }
-      },
-      "Sandbox.Clutter.ClutterGridSystem": {
-        "Storage": {
-          "$blob": "691ea7a6-5dba-49c5-8d47-f7a16d2ee51b"
         }
       },
       "Sandbox.MovieMaker.MovieRecorderSystem": {
