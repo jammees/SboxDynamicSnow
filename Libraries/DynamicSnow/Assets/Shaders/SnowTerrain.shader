@@ -563,7 +563,7 @@ PS
     #endif
 
         Material p = Material::Init();
-        p.Albedo = albedo;
+        p.Albedo = SnowTerrainMasks::Get( uv ).Sample( g_sAniso, uv );
         p.Normal = TransformNormal( norm, geoNormal, tangentU, tangentV );
         p.Roughness = roughness;
         p.Metalness = metalness;
