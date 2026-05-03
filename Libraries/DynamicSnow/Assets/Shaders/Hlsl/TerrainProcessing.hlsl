@@ -6,9 +6,8 @@
 #include "Hlsl/AttributesNames.hlsl"
 #include "terrain/TerrainCommon.hlsl"
 
-#define NOT_IN_EDITOR 0
-
 DynamicCombo( D_DYNAMIC_SNOW_IN_EDITOR, 0..1, sys( all ) );
+    #define NOT_IN_EDITOR 0
 
 struct SnowTerrainBuffer
 {
