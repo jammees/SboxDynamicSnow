@@ -17,7 +17,31 @@ struct SnowTerrainBuffer
     float TerrainSize;
 };
 
-StructuredBuffer<SnowTerrainBuffer> g_bSnowTerrain < Attribute( TERRAIN_SNOW_BUFFER_ATTR ); >;
+StructuredBuffer<SnowTerrainBuffer> g_bSnowTerrain  < Attribute( TERRAIN_SNOW_BUFFER_ATTR ); >;
+Buffer<int> g_bSnowMasks                            < Attribute( TERRAIN_MASKS_BUFFER_ATTR ); >;
+
+class SnowTerrainMasks
+{
+    static int GetChunkIndex( float2 uv )
+    {
+        SnowTerrainBuffer terrainData = g_bSnowTerrain[0];
+
+        float2 worldUv = uv * terrainData.TerrainSize;
+        float2 chunk = worldUv * terrainData.InverseUnitChunkSize;
+
+        int idx = (int)floor(chunk.x);
+        int idy = (int)floor(chunk.y) * 2;
+
+        return idx + idy;
+    }
+
+    static Texture2D Get( float2 uv )
+    {
+        int index = g_bSnowMasks[GetChunkIndex( uv )];
+
+        return Bindless::GetTexture2D(index, false);
+    }
+};
 
 class SnowTerrain
 {
@@ -26,11 +50,11 @@ class SnowTerrain
         return g_bSnowTerrain[0];
     }
 
-    static inline float3 ProcessTerrainVertex( float3 worldPosition, float2 uv )
+    static float3 ProcessTerrainVertex( float3 worldPosition, float2 uv )
     {
         #if ( D_DYNAMIC_SNOW_IN_EDITOR == NOT_IN_EDITOR )
             SnowTerrainBuffer terrainData = Get();
-            Texture2D mask = Bindless::GetTexture2D(terrainData.Mask, false);
+            Texture2D mask = SnowTerrainMasks::Get( uv );
         
             float snowHeight = mask.SampleLevel( g_sPointClamp, uv, 0 ).r;
         
@@ -49,8 +73,7 @@ class SnowTerrain
         out float3 TangentV
     )
     {
-
-        Texture2D snowMask = Bindless::GetTexture2D( terrainData.Mask, false );
+        Texture2D snowMask = SnowTerrainMasks::Get( uv );
 
         float2 heightmapSize = TextureDimensions2D( heightmap, 0 );
         float2 maskSize = TextureDimensions2D( snowMask, 0 );
