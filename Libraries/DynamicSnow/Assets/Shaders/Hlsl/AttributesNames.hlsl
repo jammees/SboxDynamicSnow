@@ -12,5 +12,6 @@
 #define HEIGHTMAP_UV_SCALE_ATTR     "HeightmapUvScale" 
 
 #define TERRAIN_SNOW_BUFFER_ATTR    "SnowTerrainBuffer"
+#define TERRAIN_MASKS_BUFFER_ATTR   "SnowTerrainMasksBuffer"
 
 #endif
