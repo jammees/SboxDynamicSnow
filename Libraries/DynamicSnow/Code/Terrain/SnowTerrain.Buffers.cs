@@ -9,6 +9,7 @@ public sealed partial class SnowTerrain
 	private void CreateBuffers()
 	{
 		_terrainMasksBuffer = new( 64, debugName: "Terrain Masks" );
+		_terrainMasksBuffer.SetData( ChunkMasks );
 	}
 
 	private void DisposeBuffers()
