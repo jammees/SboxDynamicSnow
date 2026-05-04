@@ -9,8 +9,6 @@ public sealed partial class SnowTerrain
 	private void CreateBuffers()
 	{
 		_terrainMasksBuffer = new( 64, debugName: "Terrain Masks" );
-
-		Scene.RenderAttributes.Set( "SnowTerrainMasksBuffer", _terrainMasksBuffer );
 	}
 
 	private void DisposeBuffers()
