@@ -59,17 +59,6 @@ public sealed partial class SnowTerrain : Component, Component.ExecuteInEditor
 
 		CreateBuffers();
 		CreateChunks();
-
-		// for now just upload it once
-		// however, once high and low res masks are in the picture
-		// we'll need to update the buffer if required
-		_terrainMasksBuffer.SetData( ChunkMasks );
-
-		// same here, should only need to update it once
-		// snow height changes
-		// how many chunks or how large the terrain is realistically
-		// shouldn't change mid-game
-		UploadToGPU();
 	}
 
 	protected override void OnDisabled()
@@ -97,6 +86,7 @@ public sealed partial class SnowTerrain : Component, Component.ExecuteInEditor
 			chunk.Update();
 		}
 
+		UploadToGPU();
 		DrawDebug();
 	}
 
