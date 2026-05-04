@@ -1,6 +1,6 @@
 ﻿using Sandbox;
 
-namespace Snow.Terrain;
+namespace Snow.Chunk;
 
 internal sealed partial class SnowTerrainChunk
 {

@@ -1,4 +1,6 @@
-﻿namespace Snow.Terrain;
+﻿using Snow.Chunk;
+
+namespace Snow.Terrain;
 
 public sealed partial class SnowTerrain
 {
