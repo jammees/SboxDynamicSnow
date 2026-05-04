@@ -45,7 +45,7 @@ public sealed partial class SnowTerrain : Component, Component.ExecuteInEditor
 
 					Gizmo.Draw.LineBBox( bounds );
 
-					Gizmo.Draw.Text( $"{x + (y * Division) + 1}", new Transform( bounds.Center ), size: 20f );
+					Gizmo.Draw.Text( $"{x + y * Division}", new Transform( bounds.Center ), size: 20f );
 				}
 			}
 		}
