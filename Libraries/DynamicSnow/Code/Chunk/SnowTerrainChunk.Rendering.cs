@@ -25,7 +25,7 @@ internal sealed partial class SnowTerrainChunk
 		_renderList.Attributes.Set( "SnowHeight", SnowTerrain.SnowHeight );
 		_renderList.Attributes.Set( "TerrainHeight", TerrainStorage.TerrainHeight );
 		_renderList.Attributes.Set( "HeightmapUvScale", GetInverseDimensionSize() );
-		_renderList.Attributes.Set( "SnowMask", SnowMask );
+		//_renderList.Attributes.Set( "SnowMask", SnowMask );
 
 		if ( _isMaskCleared is false )
 		{
@@ -38,8 +38,8 @@ internal sealed partial class SnowTerrainChunk
 		}
 
 		_renderList.DispatchCompute( UpdateDeformation, HighTextureSize, HighTextureSize, 1 );
-		_renderList.UavBarrier( RawDeformationMask );
-		_renderList.DispatchCompute( UpdateSnowMask, HighTextureSize, HighTextureSize, 1 );
+		//_renderList.UavBarrier( RawDeformationMask );
+		//_renderList.DispatchCompute( UpdateSnowMask, HighTextureSize, HighTextureSize, 1 );
 	}
 
 	private float GetInverseDimensionSize()

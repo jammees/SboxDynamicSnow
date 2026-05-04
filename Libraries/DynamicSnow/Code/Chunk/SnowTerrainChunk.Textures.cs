@@ -7,7 +7,7 @@ internal sealed partial class SnowTerrainChunk
 	internal int HighTextureSize => SnowTerrain.HighMaskSize.AsInt();
 
 	internal Texture RawDeformationMask;
-	internal Texture SnowMask;
+	//internal Texture SnowMask;
 	internal Texture RenderTarget;
 
 	private void CreateTextures()
@@ -21,12 +21,12 @@ internal sealed partial class SnowTerrainChunk
 			.WithUAVBinding()
 			.Finish();
 
-		SnowMask = Texture.Create( HighTextureSize, HighTextureSize, ImageFormat.A8 )
-			.WithName( $"ProcessedSnowMask{Id}" )
-			.WithAnonymous( false )
-			.WithGPUOnlyUsage()
-			.WithUAVBinding()
-			.Finish();
+		//SnowMask = Texture.Create( HighTextureSize, HighTextureSize, ImageFormat.A8 )
+		//	.WithName( $"ProcessedSnowMask{Id}" )
+		//	.WithAnonymous( false )
+		//	.WithGPUOnlyUsage()
+		//	.WithUAVBinding()
+		//	.Finish();
 
 		RenderTarget = Texture.CreateRenderTarget()
 			.WithMSAA( MultisampleAmount.MultisampleNone )
@@ -34,15 +34,14 @@ internal sealed partial class SnowTerrainChunk
 			.WithFormat( ImageFormat.A8 )
 			.Create( name: $"SnowColliderRenderTarget{Id}", anonymous: false );
 
-		SnowTerrain.ChunkMasks[Id] = SnowMask.Index;
-
-		Log.Warning( $"[{Id}] Assigned mask with index {SnowMask.Index}" );
+		//SnowTerrain.ChunkMasks[Id] = SnowMask.Index;
+		SnowTerrain.ChunkMasks[Id] = RawDeformationMask.Index;
 	}
 
 	private void DisposeTextures()
 	{
 		RawDeformationMask?.Dispose();
-		SnowMask?.Dispose();
+		//SnowMask?.Dispose();
 		RenderTarget?.Dispose();
 	}
 }
