@@ -113,6 +113,8 @@ public sealed partial class SnowTerrain : Component, Component.ExecuteInEditor
 			TerrainSize = Terrain.Storage.TerrainSize,
 		};
 
-		_terrainBuffer.SetData( new List<SnowTerrainBuffer>() { bufferData } );
+		Scene.RenderAttributes.SetData( "SnowTerrainConstantBuffer", bufferData );
+
+		Scene.RenderAttributes.Set( "SnowTerrainMasksBuffer", _terrainMasksBuffer );
 	}
 }
