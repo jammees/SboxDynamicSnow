@@ -31,6 +31,7 @@ internal sealed partial class SnowTerrainChunk
 		//Assert.NotNull( SnowMask, "Missing snow mask!" );
 
 		UpdateInternal();
+		UpdateDebug();
 	}
 
 	public void Destroy()
