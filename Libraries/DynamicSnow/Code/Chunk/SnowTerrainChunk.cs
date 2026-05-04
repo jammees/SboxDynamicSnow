@@ -28,7 +28,7 @@ internal sealed partial class SnowTerrainChunk
 	public void Update()
 	{
 		Assert.NotNull( RawDeformationMask, "Missing deformation mask!" );
-		Assert.NotNull( SnowMask, "Missing snow mask!" );
+		//Assert.NotNull( SnowMask, "Missing snow mask!" );
 
 		UpdateInternal();
 	}
