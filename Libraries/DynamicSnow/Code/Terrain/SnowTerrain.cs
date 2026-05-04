@@ -57,8 +57,8 @@ public sealed partial class SnowTerrain : Component, Component.ExecuteInEditor
 
 		ChunkMasks = new int[ChunksCount];
 
-		CreateBuffers();
 		CreateChunks();
+		CreateBuffers();
 	}
 
 	protected override void OnDisabled()
