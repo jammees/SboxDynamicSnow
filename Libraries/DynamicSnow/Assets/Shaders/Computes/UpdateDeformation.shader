@@ -40,9 +40,12 @@ CS
 		float deformation = terrainHeight - depth;
 		deformation = RemapValClamped( deformation, 0.0, g_fSnowHeight, 1.0, 0.0 );
 
-		float control = g_tTerrainControl[id.xy * (uint2)g_fHeightmapUvScaler];
-		float isSnow = control > 0 ? 0.0 : 1.0;
+		// need to figure out a way to properly sample the control map of the terrain
+		// now each chunk can't just sample it, it needs to somehow map and use the
+		// local control texture that occupies in the chunk's boundaries
+		// float control = g_tTerrainControl[id.xy * (uint2)g_fHeightmapUvScaler];
+		// float isSnow = control > 0 ? 0.0 : 1.0;
 
-		g_tDeformationMask[id.xy] = min( g_tDeformationMask[id.xy], deformation ) * isSnow;
+		g_tDeformationMask[id.xy] = min( g_tDeformationMask[id.xy], deformation ); //* isSnow;
 	}	
 }
