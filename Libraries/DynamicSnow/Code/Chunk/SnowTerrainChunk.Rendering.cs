@@ -3,7 +3,7 @@ using Sandbox.Rendering;
 using Snow.Buffers;
 using Snow.Utility;
 
-namespace Snow.Terrain;
+namespace Snow.Chunk;
 
 internal sealed partial class SnowTerrainChunk
 {
