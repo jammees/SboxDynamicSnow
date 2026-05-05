@@ -2,7 +2,7 @@ This is a work in progress rewrite of my tech jam 1 entry: [Dynamic Snow Terrain
 
 > [!NOTE]  
 > This is an in-progress library! Right now, working on chunking, which unfortunately heavily affected
-> the FPS. Went from ~120 to ~90 FPS if I even have a single chunk with 256x246 texture.
+> the FPS. Went from ~120 to ~90 FPS if I even have a single chunk with 256x256 texture.
 
 Current progress:
 
