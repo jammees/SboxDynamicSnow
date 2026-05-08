@@ -28,6 +28,8 @@ internal sealed partial class SnowTerrainChunk
 		_renderList.Attributes.Set( "ChunkOrigin", Vector2.One * ( HighTextureSize / SnowTerrain.Division ) * Id );
 		//_renderList.Attributes.Set( "SnowMask", SnowMask );
 
+		DebugSystem.Current.Add( $"[{Index}] Origin: {Vector2.One * (HighTextureSize / SnowTerrain.Division) * Id}" );
+
 		if ( _isMaskCleared is false )
 		{
 			ComputeShader clearDeformation = new( Constants.CLEAR_DEFORMATION_COMPUTE );
