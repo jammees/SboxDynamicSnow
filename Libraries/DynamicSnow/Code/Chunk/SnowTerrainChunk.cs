@@ -8,7 +8,8 @@ internal sealed partial class SnowTerrainChunk
 {
 	internal SnowTerrain SnowTerrain;
 	internal Sandbox.Terrain Terrain;
-	internal int Id;
+	internal Vector2 Id;
+	internal int Index;
 
 	private TerrainStorage TerrainStorage => SnowTerrain.Terrain.Storage;
 
@@ -16,7 +17,8 @@ internal sealed partial class SnowTerrainChunk
 	{
 		SnowTerrain = terrain;
 		Terrain = terrain.Terrain;
-		Id = (id.x + id.y * terrain.Division).FloorToInt();
+		Index = (id.x + id.y * terrain.Division).FloorToInt();
+		Id = id;
 
 		CreateBounds( id );
 		CreateComputes();
