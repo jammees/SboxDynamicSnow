@@ -12,4 +12,7 @@ internal static class Constants
 
 	[SkipHotload]
 	public const string UPDATE_MASK_COMPUTE = "shaders/computes/updatesnowmask.shader";
+
+	[SkipHotload]
+	public const string CREATE_CONTROL_MAP_COMPUTE = "shaders/computes/control/createcontrolmap.shader";
 }
