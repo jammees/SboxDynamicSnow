@@ -15,6 +15,9 @@ public sealed partial class SnowTerrain : Component, Component.ExecuteInEditor
 	[RequireComponent]
 	public Sandbox.Terrain Terrain { get; set; }
 
+	[SkipHotload]
+	public static SnowTerrain Instance;
+
 	internal int[] ChunkMasks;
 
 	private SnowTerrainChunk[] _snowChunks;
@@ -49,6 +52,15 @@ public sealed partial class SnowTerrain : Component, Component.ExecuteInEditor
 				}
 			}
 		}
+	}
+
+	protected override void OnAwake()
+	{
+		if ( Instance.IsValid() )
+		{
+			Log.Error( "Mutliple instances of dynamic snow terrain are not supported!" );
+		}
+		Instance = this;
 	}
 
 	protected override void OnEnabled()
