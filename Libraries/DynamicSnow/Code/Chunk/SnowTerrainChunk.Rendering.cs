@@ -50,8 +50,8 @@ internal sealed partial class SnowTerrainChunk
 
 	private void SetupRenderlist()
 	{
-		_renderList = new( $"DynamicSnowChunk{Id}" );
-		ColliderCamera.AddCommandList( _renderList, Stage.AfterDepthPrepass, 1000 );
+		_renderList = new( $"DynamicSnowChunk{Index}" );
+		ColliderCamera.AddCommandList( _renderList, Stage.AfterDepthPrepass, 1000 + Index );
 	}
 
 	private void CreateComputes()
