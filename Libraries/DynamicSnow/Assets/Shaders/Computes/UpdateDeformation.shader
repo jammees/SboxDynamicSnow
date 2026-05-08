@@ -16,6 +16,7 @@ CS
 	// IN
 	Texture2D<float> g_tTerrainHeightmap 	< Attribute( TERRAIN_HEIGHTMAP_ATTR ); >;	// terrain heightmap
 	Texture2D<uint> g_tTerrainControl		< Attribute( TERRAIN_CONTROL_ATTR ); >;
+	float2 g_vChunkOrigin					< Attribute( "ChunkOrigin" ); >;
 	float g_fSnowHeight 					< Attribute( SNOW_HEIGHT_ATTR ); >;			// how tall is the snow
 	float g_fTerrainHeight					< Attribute( TERRAIN_HEIGHT_ATTR ); >;		// how tall is terrain
 	float g_fHeightmapUvScaler				< Attribute( HEIGHTMAP_UV_SCALE_ATTR ); >;	// scalar of id
@@ -31,7 +32,7 @@ CS
 
 		// calculate heightmap UV in case texture sizes do not match up
 		int heightmapSize = GetFloatTextureDimensions( g_tTerrainHeightmap, 0 ).x;
-		float2 heightmapUv = ( (float2)id.xy * g_fHeightmapUvScaler ) / heightmapSize;
+		float2 heightmapUv = ( (float2)id.xy + g_vChunkOrigin ) / heightmapSize;
 
 		float terrainHeight = g_tTerrainHeightmap.SampleLevel( g_sBilinearClamp, heightmapUv, 0 );
 		terrainHeight *= g_fTerrainHeight;
@@ -46,6 +47,8 @@ CS
 		// float control = g_tTerrainControl[id.xy * (uint2)g_fHeightmapUvScaler];
 		// float isSnow = control > 0 ? 0.0 : 1.0;
 
-		g_tDeformationMask[id.xy] = min( g_tDeformationMask[id.xy], deformation ); //* isSnow;
+		// g_tDeformationMask[id.xy] = min( g_tDeformationMask[id.xy], deformation ); //* isSnow;
+
+		g_tDeformationMask[id.xy] = float3( depth, 0, 0 );
 	}	
 }
