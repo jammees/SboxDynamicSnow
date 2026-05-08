@@ -563,7 +563,16 @@ PS
     #endif
 
         Material p = Material::Init();
-        p.Albedo = SnowTerrainMasks::Get( uv ).Sample( g_sBilinearBorder, SnowTerrainMasks::GetLocalUv( uv ) );
+        
+        if ( Blink( 1.0 ) )
+        {
+            p.Albedo = float3(uv, 0);
+        }
+        else
+        {
+            p.Albedo = SnowTerrainMasks::Get( uv ).Sample( g_sBilinearBorder, SnowTerrainMasks::GetLocalUv( uv ) );
+        }
+
         p.Normal = TransformNormal( norm, geoNormal, tangentU, tangentV );
         p.Roughness = roughness;
         p.Metalness = metalness;
