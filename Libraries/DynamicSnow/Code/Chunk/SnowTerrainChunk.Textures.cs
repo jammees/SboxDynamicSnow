@@ -14,7 +14,7 @@ internal sealed partial class SnowTerrainChunk
 	{
 		DisposeTextures();
 
-		RawDeformationMask = Texture.Create( HighTextureSize, HighTextureSize, ImageFormat.R16 )
+		RawDeformationMask = Texture.Create( HighTextureSize, HighTextureSize, ImageFormat.RGB888 )
 			.WithName( $"RawDeformationSnowMask{Index}" )
 			.WithAnonymous( false )
 			.WithGPUOnlyUsage()
