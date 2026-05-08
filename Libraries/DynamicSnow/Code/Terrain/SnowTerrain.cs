@@ -71,6 +71,7 @@ public sealed partial class SnowTerrain : Component, Component.ExecuteInEditor
 		ChunkMasks = new int[ChunksCount];
 
 		CreateChunks();
+		CreateControlMap();
 		CreateBuffers();
 	}
 
