@@ -457,7 +457,7 @@
           ],
           "Children": [
             {
-              "__guid": "20eeea65-6f0b-45ff-98aa-b20a49699cc2",
+              "__guid": "4f4b3722-8b1d-4229-870b-07c73dbad7e6",
               "__version": 2,
               "Flags": 0,
               "Name": "Clothing - qa_team_tshirt",
@@ -474,7 +474,7 @@
               "Components": [
                 {
                   "__type": "Sandbox.SkinnedModelRenderer",
-                  "__guid": "594f6345-84ec-4f89-b3cc-45742005c600",
+                  "__guid": "148736ed-9d17-460e-860d-b245f2f6b22d",
                   "__enabled": true,
                   "Flags": 0,
                   "AnimationGraph": null,
@@ -526,7 +526,7 @@
               "Children": []
             },
             {
-              "__guid": "de0bd4b1-a1f8-4122-a6ba-5695e647e6ed",
+              "__guid": "6179b413-82d9-402c-8e84-27aea22eb96b",
               "__version": 2,
               "Flags": 0,
               "Name": "Clothing - m1helmet",
@@ -543,7 +543,7 @@
               "Components": [
                 {
                   "__type": "Sandbox.SkinnedModelRenderer",
-                  "__guid": "0cd340b1-6e13-45c1-97ed-d1e11bb15e67",
+                  "__guid": "47acac37-8bb2-4fed-b49b-214304afdb3b",
                   "__enabled": true,
                   "Flags": 0,
                   "AnimationGraph": null,
@@ -595,7 +595,7 @@
               "Children": []
             },
             {
-              "__guid": "62c78738-e4aa-45cc-a81c-82e0401ae5cd",
+              "__guid": "c0d6efc3-7e93-4374-8c28-3c4c18fd7887",
               "__version": 2,
               "Flags": 0,
               "Name": "Clothing - rubber_gloves_black",
@@ -612,7 +612,7 @@
               "Components": [
                 {
                   "__type": "Sandbox.SkinnedModelRenderer",
-                  "__guid": "31d8a19c-6327-4e37-9d53-bb0259a261b5",
+                  "__guid": "ee0d17b3-82bc-4179-86eb-d7e844257c0b",
                   "__enabled": true,
                   "Flags": 0,
                   "AnimationGraph": null,
@@ -664,7 +664,7 @@
               "Children": []
             },
             {
-              "__guid": "9c626bd4-57e4-4c74-b1db-8713ba7f21b2",
+              "__guid": "cba233c6-e241-4489-af67-7e14e8ff7be4",
               "__version": 2,
               "Flags": 0,
               "Name": "Clothing - eyebrows",
@@ -681,7 +681,7 @@
               "Components": [
                 {
                   "__type": "Sandbox.SkinnedModelRenderer",
-                  "__guid": "66507cad-2228-468c-98b3-0abafec15d76",
+                  "__guid": "bb876569-b4a9-4b3d-b861-bff924beb288",
                   "__enabled": true,
                   "Flags": 0,
                   "AnimationGraph": null,
@@ -733,7 +733,7 @@
               "Children": []
             },
             {
-              "__guid": "c5febd28-af1f-47d1-b504-766b7caf0135",
+              "__guid": "a931eeba-6474-427b-9bcc-0f26d99c9d57",
               "__version": 2,
               "Flags": 0,
               "Name": "Clothing - medium_beard",
@@ -750,7 +750,7 @@
               "Components": [
                 {
                   "__type": "Sandbox.SkinnedModelRenderer",
-                  "__guid": "3e8de574-dc7c-431b-8616-fe1da1d0e5d7",
+                  "__guid": "0770d52c-2987-4815-8ddd-01853431173b",
                   "__enabled": true,
                   "Flags": 0,
                   "AnimationGraph": null,
@@ -802,7 +802,7 @@
               "Children": []
             },
             {
-              "__guid": "9cbe9dc0-ffc1-4954-82a3-faf9b84aed98",
+              "__guid": "9764a75c-10e1-4f3b-961d-a4fc8714f6a7",
               "__version": 2,
               "Flags": 0,
               "Name": "Clothing - sneakers",
@@ -819,7 +819,7 @@
               "Components": [
                 {
                   "__type": "Sandbox.SkinnedModelRenderer",
-                  "__guid": "e87b76f7-9c1b-4d66-b120-76a518261ea6",
+                  "__guid": "1a9a4569-7ab5-4cf2-b172-61c641613fc2",
                   "__enabled": true,
                   "Flags": 0,
                   "AnimationGraph": null,
@@ -871,7 +871,7 @@
               "Children": []
             },
             {
-              "__guid": "56f7996e-939c-47a6-bb68-cd61f855e718",
+              "__guid": "49fb17dd-19b9-48c3-90ec-8856d27890bf",
               "__version": 2,
               "Flags": 0,
               "Name": "Clothing - jeans",
@@ -888,7 +888,7 @@
               "Components": [
                 {
                   "__type": "Sandbox.SkinnedModelRenderer",
-                  "__guid": "c320fb6e-6de0-4a1f-9e1f-f1884366cea4",
+                  "__guid": "5156ee28-eddf-42de-87ac-bce091f0fcbe",
                   "__enabled": true,
                   "Flags": 0,
                   "AnimationGraph": null,
@@ -1172,7 +1172,7 @@
           "__guid": "6442b5e3-92d3-4e50-8b69-c5f258c38b97",
           "__enabled": true,
           "Flags": 0,
-          "Division": 1,
+          "Division": 2,
           "HighMaskSize": "Tiny",
           "OnComponentDestroy": null,
           "OnComponentDisabled": null,
@@ -1190,200 +1190,7 @@
           }
         }
       ],
-      "Children": [
-        {
-          "__guid": "523be0a2-1bcb-4e95-ad5e-b0edbda1d1b5",
-          "__version": 2,
-          "Flags": 0,
-          "Name": "CameraContainer-0",
-          "Position": "750,750,0",
-          "Rotation": "0.49999997,-0.49999997,0.49999997,0.49999997",
-          "Scale": "1,1,1",
-          "Tags": "",
-          "Enabled": true,
-          "NetworkMode": 2,
-          "NetworkFlags": 0,
-          "NetworkOrphaned": 0,
-          "NetworkTransmit": true,
-          "OwnerTransfer": 1,
-          "Components": [
-            {
-              "__type": "Sandbox.CameraComponent",
-              "__guid": "d7051838-7d45-4e1b-a15d-2996a69da9c0",
-              "__enabled": true,
-              "Flags": 0,
-              "BackgroundColor": "0,0,0,1",
-              "ClearFlags": "All",
-              "EnablePostProcessing": false,
-              "FieldOfView": 60,
-              "FovAxis": "Horizontal",
-              "IsMainCamera": false,
-              "OnComponentDestroy": null,
-              "OnComponentDisabled": null,
-              "OnComponentEnabled": null,
-              "OnComponentFixedUpdate": null,
-              "OnComponentStart": null,
-              "OnComponentUpdate": null,
-              "Orthographic": true,
-              "OrthographicHeight": 1500,
-              "PostProcessAnchor": null,
-              "Priority": 1,
-              "RenderExcludeTags": "",
-              "RenderTags": null,
-              "RenderTexture": null,
-              "TargetEye": "None",
-              "Viewport": "0,0,1,1",
-              "ZFar": 520.4,
-              "ZNear": 0
-            }
-          ],
-          "Children": []
-        },
-        {
-          "__guid": "a69452e0-95f9-47c1-8478-e42bb48f44e3",
-          "__version": 2,
-          "Flags": 0,
-          "Name": "CameraContainer-2",
-          "Position": "750,2250,0",
-          "Rotation": "0.49999997,-0.49999997,0.49999997,0.49999997",
-          "Scale": "1,1,1",
-          "Tags": "",
-          "Enabled": true,
-          "NetworkMode": 2,
-          "NetworkFlags": 0,
-          "NetworkOrphaned": 0,
-          "NetworkTransmit": true,
-          "OwnerTransfer": 1,
-          "Components": [
-            {
-              "__type": "Sandbox.CameraComponent",
-              "__guid": "2dd8916c-a069-4a2c-8182-593234979a2c",
-              "__enabled": true,
-              "Flags": 0,
-              "BackgroundColor": "0,0,0,1",
-              "ClearFlags": "All",
-              "EnablePostProcessing": false,
-              "FieldOfView": 60,
-              "FovAxis": "Horizontal",
-              "IsMainCamera": false,
-              "OnComponentDestroy": null,
-              "OnComponentDisabled": null,
-              "OnComponentEnabled": null,
-              "OnComponentFixedUpdate": null,
-              "OnComponentStart": null,
-              "OnComponentUpdate": null,
-              "Orthographic": true,
-              "OrthographicHeight": 1500,
-              "PostProcessAnchor": null,
-              "Priority": 1,
-              "RenderExcludeTags": "",
-              "RenderTags": null,
-              "RenderTexture": null,
-              "TargetEye": "None",
-              "Viewport": "0,0,1,1",
-              "ZFar": 520.4,
-              "ZNear": 0
-            }
-          ],
-          "Children": []
-        },
-        {
-          "__guid": "447c9b53-67bc-4b99-9dfc-73863ef69385",
-          "__version": 2,
-          "Flags": 0,
-          "Name": "CameraContainer-1",
-          "Position": "2250,750,0",
-          "Rotation": "0.49999997,-0.49999997,0.49999997,0.49999997",
-          "Scale": "1,1,1",
-          "Tags": "",
-          "Enabled": true,
-          "NetworkMode": 2,
-          "NetworkFlags": 0,
-          "NetworkOrphaned": 0,
-          "NetworkTransmit": true,
-          "OwnerTransfer": 1,
-          "Components": [
-            {
-              "__type": "Sandbox.CameraComponent",
-              "__guid": "313527a2-5874-49bc-be8f-5ce6d3f537aa",
-              "__enabled": true,
-              "Flags": 0,
-              "BackgroundColor": "0,0,0,1",
-              "ClearFlags": "All",
-              "EnablePostProcessing": false,
-              "FieldOfView": 60,
-              "FovAxis": "Horizontal",
-              "IsMainCamera": false,
-              "OnComponentDestroy": null,
-              "OnComponentDisabled": null,
-              "OnComponentEnabled": null,
-              "OnComponentFixedUpdate": null,
-              "OnComponentStart": null,
-              "OnComponentUpdate": null,
-              "Orthographic": true,
-              "OrthographicHeight": 1500,
-              "PostProcessAnchor": null,
-              "Priority": 1,
-              "RenderExcludeTags": "",
-              "RenderTags": null,
-              "RenderTexture": null,
-              "TargetEye": "None",
-              "Viewport": "0,0,1,1",
-              "ZFar": 520.4,
-              "ZNear": 0
-            }
-          ],
-          "Children": []
-        },
-        {
-          "__guid": "7820b350-8f8a-4e7f-8d34-60f0fc92d0b8",
-          "__version": 2,
-          "Flags": 0,
-          "Name": "CameraContainer-3",
-          "Position": "2250,2250,0",
-          "Rotation": "0.49999997,-0.49999997,0.49999997,0.49999997",
-          "Scale": "1,1,1",
-          "Tags": "",
-          "Enabled": true,
-          "NetworkMode": 2,
-          "NetworkFlags": 0,
-          "NetworkOrphaned": 0,
-          "NetworkTransmit": true,
-          "OwnerTransfer": 1,
-          "Components": [
-            {
-              "__type": "Sandbox.CameraComponent",
-              "__guid": "7037b7b5-4d7f-4cde-a018-de14601e6c67",
-              "__enabled": true,
-              "Flags": 0,
-              "BackgroundColor": "0,0,0,1",
-              "ClearFlags": "All",
-              "EnablePostProcessing": false,
-              "FieldOfView": 60,
-              "FovAxis": "Horizontal",
-              "IsMainCamera": false,
-              "OnComponentDestroy": null,
-              "OnComponentDisabled": null,
-              "OnComponentEnabled": null,
-              "OnComponentFixedUpdate": null,
-              "OnComponentStart": null,
-              "OnComponentUpdate": null,
-              "Orthographic": true,
-              "OrthographicHeight": 1500,
-              "PostProcessAnchor": null,
-              "Priority": 1,
-              "RenderExcludeTags": "",
-              "RenderTags": null,
-              "RenderTexture": null,
-              "TargetEye": "None",
-              "Viewport": "0,0,1,1",
-              "ZFar": 520.4,
-              "ZNear": 0
-            }
-          ],
-          "Children": []
-        }
-      ]
+      "Children": []
     },
     {
       "__guid": "c9db66b4-1a0e-4de5-85d2-2994f6d825d3",
@@ -1724,17 +1531,17 @@
       "CustomBounds": false
     },
     "GameObjectSystems": {
-      "Sandbox.Clutter.ClutterGridSystem": {
-        "Storage": {
-          "$blob": "86c0ae04-75b1-46b2-8f86-a46dd85f0928"
+      "Sandbox.SelectionSetsSystem": {
+        "Data": {
+          "SelectionSets": []
         }
       },
       "Sandbox.MovieMaker.MovieRecorderSystem": {
         "DisableClientRecording": false
       },
-      "Sandbox.SelectionSetsSystem": {
-        "Data": {
-          "SelectionSets": []
+      "Sandbox.Clutter.ClutterGridSystem": {
+        "Storage": {
+          "$blob": "86c0ae04-75b1-46b2-8f86-a46dd85f0928"
         }
       }
     }
