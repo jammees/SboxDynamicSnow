@@ -21,7 +21,7 @@ CS
 	float g_fHeightmapUvScaler				< Attribute( HEIGHTMAP_UV_SCALE_ATTR ); >;	// scalar of id
 
 	// OUT
-	RWTexture2D<float> g_tDeformationMask	< Attribute( DEFORMATION_MASK_ATTR ); >;	// deformation, no blur
+	RWTexture2D<float3> g_tDeformationMask	< Attribute( DEFORMATION_MASK_ATTR ); >;	// deformation, no blur
 
 	[numthreads( 8, 8, 1 )]
 	void MainCs( uint3 id : SV_DispatchThreadID )
