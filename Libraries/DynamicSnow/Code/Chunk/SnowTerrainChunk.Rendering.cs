@@ -25,6 +25,7 @@ internal sealed partial class SnowTerrainChunk
 		_renderList.Attributes.Set( "SnowHeight", SnowTerrain.SnowHeight );
 		_renderList.Attributes.Set( "TerrainHeight", TerrainStorage.TerrainHeight );
 		_renderList.Attributes.Set( "HeightmapUvScale", GetInverseDimensionSize() );
+		_renderList.Attributes.Set( "ChunkOrigin", Vector2.One * ( HighTextureSize / SnowTerrain.Division ) * Id );
 		//_renderList.Attributes.Set( "SnowMask", SnowMask );
 
 		if ( _isMaskCleared is false )
